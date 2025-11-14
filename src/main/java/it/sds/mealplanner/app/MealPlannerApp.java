@@ -1,14 +1,7 @@
 package it.sds.mealplanner.app;
 
-import it.sds.mealplanner.model.MealPlan;
-import it.sds.mealplanner.model.DayPlan;
-import it.sds.mealplanner.model.MealSlot;
-import it.sds.mealplanner.model.MealType;
+import it.sds.mealplanner.model.*;
 import it.sds.mealplanner.model.Recipe;
-import it.sds.mealplanner.model.Ingredient;
-import it.sds.mealplanner.model.Unit;
-import it.sds.mealplanner.model.Recipe;
-//import it.sds.mealplanner.model.Pantry;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
