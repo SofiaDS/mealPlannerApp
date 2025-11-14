@@ -9,8 +9,10 @@ public class Pantry {
     private final Map<Ingredient, PantryItem> items = new HashMap<>();
 
     /**
-     * Add quantity to pastru
-     * if ingredient already exists -> increase quantity else create a new PantryItem
+     * Add a given quantity of a given ingredient to the pantry
+     * @param ingredient the ingredient to add
+     * @param quantity the quantity of the ingredient to add
+     * @throws IllegalArgumentException if the ingredient is null or if the quantity is not positive
      */
     public void addStock(Ingredient ingredient, double quantity) {
         if (ingredient == null) {
@@ -29,23 +31,27 @@ public class Pantry {
         }
     }
 
+
     /**
-     * return available quantity for a given ingredient
+     * Returns the available quantity of a given ingredient in the pantry.
+     * If the ingredient is not present in the pantry, returns 0.0.
+     * @param ingredient the ingredient to check
+     * @return the available quantity of the ingredient, or 0.0 if not present
      */
     public double getAvailableQuantity(Ingredient ingredient) {
         PantryItem item = items.get(ingredient);
         return (item == null) ? 0.0 : item.getQuantityAvailable();
     }
 
-    /**
-     * return only-read of items
-     */
     public Map<Ingredient, PantryItem> getItems() {
         return Collections.unmodifiableMap(items);
     }
 
+
     /**
-     * check if the ingredients required by recipe are enough
+     * Check if the pantry contains sufficient ingredients to make a given recipe.
+     * @param recipe the recipe to check
+     * @return true if the pantry contains sufficient ingredients, false otherwise
      */
     public boolean canMakeRecipe(Recipe recipe) {
         if (recipe == null) {
@@ -61,8 +67,9 @@ public class Pantry {
     }
 
     /**
-     * Decrease / remove omgredients from pantry
-     * error if ingredients are insufficient for given recipe
+     * Consumes the necessary ingredients from the pantry to make a given recipe.
+     * @param recipe the recipe to make
+     * @throws IllegalStateException if the pantry does not contain enough ingredients to make the recipe
      */
     public void consumeForRecipe(Recipe recipe) {
         if (canMakeRecipe(recipe)) {
@@ -79,6 +86,12 @@ public class Pantry {
         }
     }
 
+    /**
+     * Returns a map of ingredients to the quantity of each ingredient that is missing from the pantry
+     * in order to make the given recipe.
+     * @param recipe the recipe to check
+     * @return a map of ingredients to the quantity of each ingredient that is missing from the pantry
+     */
     public Map<Ingredient, Double> calculateMissingForRecipe(Recipe recipe) {
         if (recipe == null) {
             throw new IllegalArgumentException("Recipe cannot be null");

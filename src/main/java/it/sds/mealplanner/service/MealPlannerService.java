@@ -16,36 +16,17 @@ public class MealPlannerService {
         this.pantry = pantry;
     }
 
-    // VERSIONE "SIMPLE": usa solo la dispensa, niente shopping list
-    public boolean assignRecipeUsingPantry(MealPlan plan,
-                                           DayOfWeek startDay,
-                                           MealType type,
-                                           Recipe recipe) {
-        if (plan == null) {
-            throw new IllegalArgumentException("MealPlan cannot be null");
-        }
-        if (startDay == null) {
-            throw new IllegalArgumentException("Start day cannot be null");
-        }
-        if (type == null) {
-            throw new IllegalArgumentException("Meal type cannot be null");
-        }
-        if (recipe == null) {
-            throw new IllegalArgumentException("Recipe cannot be null");
-        }
-
-        // se non ce la facciamo, NON consumiamo e NON assegnamo
-        if (!pantry.canMakeRecipe(recipe)) {
-            return false;
-        }
-
-        // qui siamo sicuri che basta
-        pantry.consumeForRecipe(recipe);
-        plan.assignRecipeAuto(startDay, type, recipe);
-        return true;
-    }
-
-    // VERSIONE "COMPLETA": se mancano ingredienti, aggiorna la shopping list
+/**
+ * Assegna un'ordine di cucina in base alla MealPlan Plan. 
+ * @param plan The MealPlan Plan to assign the recipe to.
+.
+The plan can be null.
+ * @param startDay The day of the week to start the meal plan
+ * @param type The type of the meal to assign to the plan
+ * @param recipe The recipe to assign to the plan
+ * @param shoppingList The shopping list to assign to the plan
+ * @return true if the assignment was successful, false otherwise
+ */
     public boolean assignRecipeUsingPantry(MealPlan plan,
                                            DayOfWeek startDay,
                                            MealType type,
@@ -67,16 +48,13 @@ public class MealPlannerService {
             throw new IllegalArgumentException("ShoppingList cannot be null");
         }
 
-        // calcolo cosa manca PRIMA di consumare
         Map<Ingredient, Double> missing = pantry.calculateMissingForRecipe(recipe);
 
         if (!missing.isEmpty()) {
-            // non basta: aggiorno la shopping list, NON consumo, NON assegno
             shoppingList.addAll(missing);
             return false;
         }
 
-        // qui so che non manca nulla
         pantry.consumeForRecipe(recipe);
         plan.assignRecipeAuto(startDay, type, recipe);
         return true;

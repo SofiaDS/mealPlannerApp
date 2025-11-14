@@ -29,11 +29,6 @@ public class Recipe {
         this.ingredients = new ArrayList<>();
     }
 
-    /*
-    *  obj creation delegated to method to automatically generate ids - factory method
-    * usage:
-    * Recipe r1 = Recipe.create("Pasta e ceci");
-    * */
     public static Recipe create(String name) {
         String id = "R" + NEXT_ID++;  // es: R1, R2, R3...
         return new Recipe(id, name);
@@ -59,6 +54,12 @@ public class Recipe {
 
     }
 
+    /**
+     * Adds an ingredient to the recipe.
+     * @param ingredient the ingredient to add; must not be null
+     * @param quantityRequired the quantity of the ingredient required; must be > 0
+     * @throws IllegalArgumentException if the ingredient is null or the quantity is <= 0
+     */
     public void addIngredient(Ingredient ingredient, double quantityRequired){
         if (ingredient == null) {
             throw new IllegalArgumentException("Ingredient cannot be null");

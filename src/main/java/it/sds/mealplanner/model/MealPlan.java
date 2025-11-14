@@ -27,6 +27,12 @@ public class MealPlan implements Iterable<MealSlot> {
         return days;
     }
 
+    /**
+     * Adds a DayPlan to the MealPlan. The DayPlan cannot be null.
+     * 
+     * @param dayPlan the DayPlan to add
+     * @throws IllegalArgumentException if dayPlan is null
+     */
     public void addDayPlan(DayPlan dayPlan) {
         if (dayPlan == null) {
             throw new IllegalArgumentException("DayPlan cannot be null");
@@ -34,6 +40,11 @@ public class MealPlan implements Iterable<MealSlot> {
         days.add(dayPlan);
     }
 
+    /**
+     * Returns a list of all the MealSlot objects in the meal plan.
+     * 
+     * @return a list of all the MealSlot objects in the meal plan
+     */
     public List<MealSlot> getAllMeals() {
         List<MealSlot> result = new ArrayList<>();
         for (DayPlan dayPlan : days) {
@@ -42,11 +53,22 @@ public class MealPlan implements Iterable<MealSlot> {
         return result;
     }
 
+/**
+ * Returns an iterator over all the MealSlot objects in the meal plan.
+ * 
+ * @return an iterator over all the MealSlot objects in the meal plan
+ */
     @Override
     public Iterator<MealSlot> iterator() {
         return getAllMeals().iterator();
     }
 
+    /**
+     * Returns the DayPlan object for the given day, or null if not found.
+     * 
+     * @param day the day to search for
+     * @return the DayPlan object for the given day, or null if not found
+     */
     private DayPlan findDayPlan(DayOfWeek day) {
         for (DayPlan dp : days) {
             if (dp.getDay() == day) {
@@ -57,9 +79,15 @@ public class MealPlan implements Iterable<MealSlot> {
     }
 
     /**
-     * Try to assign a recipe starting from startDay:
+     * Tries to assign a recipe starting from startDay:
      * - if that day has a free slot, use it
      * - otherwise move to the next day, up to 7 attempts
+     * 
+     * @param startDay the day to start searching from
+     * @param type the meal type to assign the recipe to
+     * @param recipe the recipe to assign
+     * @throws IllegalArgumentException if startDay or type are null
+     * @throws IllegalStateException if no free slot for the given meal type is found in the whole week
      */
     public void assignRecipeAuto(DayOfWeek startDay, MealType type, Recipe recipe) {
         if (startDay == null) {

@@ -8,6 +8,13 @@ public class ShoppingList {
 
     private final Map<Ingredient, Double> items = new HashMap<>();
 
+    /**
+     * Adds a given quantity of the given ingredient to the list.
+     *
+     * @param ingredient the ingredient to add
+     * @param quantity the quantity to add
+     * @throws IllegalArgumentException if the ingredient is null or the quantity is not positive
+     */
     public void addItem(Ingredient ingredient, double quantity) {
         if (ingredient == null) {
             throw new IllegalArgumentException("Ingredient cannot be null");
@@ -20,6 +27,13 @@ public class ShoppingList {
         items.put(ingredient, current + quantity);
     }
 
+    /**
+     * Adds all the given items to the list. If the given map is null, the
+     * method does nothing.
+     *
+     * @param missing the items to add, where the key is the ingredient and
+     *            the value is the quantity to add
+     */
     public void addAll(Map<Ingredient, Double> missing) {
         if (missing == null) {
             return;
