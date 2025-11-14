@@ -10,4 +10,9 @@ public class PantryItem {
             throw new IllegalArgumentException("Ingredient cannot be null");
         }
         if (quantityAvailable < 0) {
-            throw new IllegalArgumentException("Quantity available cannot be negat
+            throw new IllegalArgumentException("Quantity available cannot be negat");
+        }
+        this.ingredient = ingredient;
+        this.quantityAvailable = quantityAvailable;
+    }
+}
