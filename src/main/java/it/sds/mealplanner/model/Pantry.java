@@ -54,10 +54,10 @@ public class Pantry {
         for (RecipeIngredient ri : recipe.getIngredients()) {
             double available = getAvailableQuantity(ri.getIngredient());
             if (available < ri.getQuantityRequired()) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -65,7 +65,7 @@ public class Pantry {
      * error if ingredients are insufficient for given recipe
      */
     public void consumeForRecipe(Recipe recipe) {
-        if (!canMakeRecipe(recipe)) {
+        if (canMakeRecipe(recipe)) {
             throw new IllegalStateException(
                     "Not enough ingredients in pantry to make recipe: " + recipe.getName()
             );
@@ -78,4 +78,22 @@ public class Pantry {
             item.setQuantityAvailable(newQuantity);
         }
     }
+
+    public Map<Ingredient, Double> calculateMissingForRecipe(Recipe recipe) {
+        if (recipe == null) {
+            throw new IllegalArgumentException("Recipe cannot be null");
+        }
+
+        Map<Ingredient, Double> missing = new HashMap<>();
+        for (RecipeIngredient ri : recipe.getIngredients()) {
+            double available = getAvailableQuantity(ri.getIngredient());
+            double required = ri.getQuantityRequired();
+            if (available < required) {
+                double need = required - available;
+                missing.put(ri.getIngredient(), need);
+            }
+        }
+        return missing;
+    }
+
 }
