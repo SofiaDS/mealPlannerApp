@@ -38,7 +38,6 @@ public class MealSlot {
 
     @Override
     public String toString() {
-        return  type +
-                " = " + (recipe != null ? recipe.getName() : "EMPTY");
+        return type + " = " + (recipe != null ? recipe.getName() : "EMPTY");
     }
 }

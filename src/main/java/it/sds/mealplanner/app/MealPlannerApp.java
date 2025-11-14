@@ -15,40 +15,31 @@ public class MealPlannerApp {
         //create recipes
         Recipe pastaCeci = Recipe.create("Pasta e ceci");
         Recipe oatmeal = Recipe.create("Oatmeal proteico");
-        Recipe two = Recipe.create("Yogurt greco + frutta");
-        Recipe three = Recipe.create("Orata con patate e insalata");
-        Recipe four = Recipe.create("Mela");
-        Recipe five = Recipe.create("Cous cous con verdure di stagione");
-        //create mealSlot
-        MealSlot mondayLunch = new MealSlot(DayOfWeek.MONDAY, MealType.LUNCH, pastaCeci);
-        MealSlot mondayBreakfast = new MealSlot(DayOfWeek.MONDAY, MealType.BREAKFAST, oatmeal);
-        MealSlot mondaySnack = new MealSlot(DayOfWeek.MONDAY, MealType.SNACK, two);
-        MealSlot mondaySnack2 = new MealSlot(DayOfWeek.MONDAY, MealType.SNACK, four);
-        MealSlot mondayDinner = new MealSlot(DayOfWeek.MONDAY, MealType.DINNER, three);
-        MealSlot tuesdayLunch = new MealSlot(DayOfWeek.TUESDAY, MealType.LUNCH, five);
-        //create day plan
+        Recipe appleSnack = Recipe.create("Mela");
+        Recipe bananaSnack = Recipe.create("Banana");
+        Recipe orangeSnack = Recipe.create("Orange");
+        Recipe nutsSnack = Recipe.create("Frutta secca");
+        Recipe yogurtBreakfast = Recipe.create("Yogurt greco + frutta");
+        Recipe fishVeg = Recipe.create("Orata con patate e insalata");
+        Recipe cousVeg = Recipe.create("Cous cous con verdure di stagione");
+
         DayPlan monday = new DayPlan(DayOfWeek.MONDAY);
-        monday.addMeal(mondayBreakfast);
-        monday.addMeal(mondayLunch);
-        monday.addMeal(mondaySnack);
-        monday.addMeal(mondaySnack2);
-        monday.addMeal(mondayDinner);
         DayPlan tuesday = new DayPlan(DayOfWeek.TUESDAY);
-        tuesday.addMeal(tuesdayLunch);
-        //create mealplan
+
+        monday.assignRecipe(MealType.BREAKFAST, oatmeal);
+        monday.assignRecipe(MealType.SNACK, appleSnack);
+        monday.assignRecipe(MealType.LUNCH, pastaCeci);
+        monday.assignRecipe(MealType.SNACK, nutsSnack);
+        monday.assignRecipe(MealType.DINNER, fishVeg);
+        monday.assignRecipe(MealType.SNACK, nutsSnack);
+        tuesday.assignRecipe(MealType.BREAKFAST, yogurtBreakfast);
+        tuesday.assignRecipe(MealType.SNACK, orangeSnack);
+        tuesday.assignRecipe(MealType.LUNCH, cousVeg);
+        tuesday.assignRecipe(MealType.SNACK, bananaSnack);
         MealPlan plan = new MealPlan(LocalDate.now());
         plan.addDayPlan(monday);
         plan.addDayPlan(tuesday);
 
-        //System.out.println("Meal plan:");
-        //System.out.println(plan);
-        System.out.println("\nAll meals in the plan:");
-        for (MealSlot slot : plan.getAllMeals()) {
-            System.out.println(slot.getDay() + ": " + slot);
-        }
-        System.out.println("\nAll meals in the plan (using Iterable):");
-        for (MealSlot slot : plan) {
-            System.out.println(slot.getDay() + ": " + slot);
-        }
+        System.out.println(plan);
     }
 }

@@ -50,10 +50,13 @@ public class MealPlan implements Iterable<MealSlot> {
 
     @Override
     public String toString() {
-        return "MealPlan{" +
-                "startDate=" + startDate +
-                ", days=" + days +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Meal plan starting ").append(startDate).append("\n\n");
+        for (DayPlan dayPlan : days) {
+            sb.append(dayPlan).append("\n");
+        }
+        return sb.toString();
     }
+
 }
 

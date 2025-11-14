@@ -64,7 +64,12 @@ public class DayPlan {
 
     @Override
     public String toString() {
-        return "DayPlan " + day +
-                " meals=" + meals;
-    }
+            StringBuilder sb = new StringBuilder();
+            sb.append(day).append("\n");
+            for (MealSlot slot : meals) {
+                sb.append("  ").append(slot).append("\n"); // indent meals a bit
+            }
+            return sb.toString();
+        }
+
 }
