@@ -48,9 +48,8 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Recipe{" +
+        return "Recipe " +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+                ", name='" + name + '\'' ;
     }
 }

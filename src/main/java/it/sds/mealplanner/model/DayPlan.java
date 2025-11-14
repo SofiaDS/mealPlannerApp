@@ -32,12 +32,12 @@ public class DayPlan {
         // TBD check that in a day there is no double lunch/dinner/breakfast
         meals.add(mealSlot);
     }
-
+    /*
+     * TBD when returning the day plan I want a fixed order breakfast - snack - lunch - snack - dinner
+     * */
     @Override
     public String toString() {
-        return "DayPlan{" +
-                "day=" + day +
-                ", meals=" + meals +
-                '}';
+        return "DayPlan " + day +
+                " meals=" + meals;
     }
 }

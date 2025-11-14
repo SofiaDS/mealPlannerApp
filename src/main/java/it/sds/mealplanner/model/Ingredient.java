@@ -25,10 +25,9 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "Ingredient{" +
+        return "Ingredient " +
                 "name='" + name + '\'' +
-                ", unit=" + unit +
-                '}';
+                ", unit=" + unit;
     }
     /*
     * TBD what if in different moments two ingredients with same name and unit are instantiated?
