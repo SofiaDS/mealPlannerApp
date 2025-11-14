@@ -1,11 +1,10 @@
 package it.sds.mealplanner.model;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-/*
-* weekly plan 7 days 5 recipes per day
-* */
 
 public class MealPlan implements Iterable<MealSlot> {
 
@@ -44,8 +43,49 @@ public class MealPlan implements Iterable<MealSlot> {
     }
 
     @Override
-    public java.util.Iterator<MealSlot> iterator() {
+    public Iterator<MealSlot> iterator() {
         return getAllMeals().iterator();
+    }
+
+    private DayPlan findDayPlan(DayOfWeek day) {
+        for (DayPlan dp : days) {
+            if (dp.getDay() == day) {
+                return dp;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Try to assign a recipe starting from startDay:
+     * - if that day has a free slot, use it
+     * - otherwise move to the next day, up to 7 attempts
+     */
+    public void assignRecipeAuto(DayOfWeek startDay, MealType type, Recipe recipe) {
+        if (startDay == null) {
+            throw new IllegalArgumentException("Start day cannot be null");
+        }
+        if (type == null) {
+            throw new IllegalArgumentException("Meal type cannot be null");
+        }
+
+        DayOfWeek current = startDay;
+        int attempts = 0;
+
+        while (attempts < 7) { // 7 days / attempts
+            DayPlan dayPlan = findDayPlan(current);
+            if (dayPlan != null) {
+                boolean assigned = dayPlan.tryAssignRecipe(type, recipe);
+                if (assigned) {
+                    return;
+            }
+            }
+
+            current = current.plus(1); // LUN->MAR->...->DOM->LUN
+            attempts++;
+        }
+
+        throw new IllegalStateException("No free slot for " + type + " in the whole week");
     }
 
     @Override
@@ -57,6 +97,4 @@ public class MealPlan implements Iterable<MealSlot> {
         }
         return sb.toString();
     }
-
 }
-

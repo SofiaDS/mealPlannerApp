@@ -23,22 +23,25 @@ public class MealPlannerApp {
         Recipe fishVeg = Recipe.create("Orata con patate e insalata");
         Recipe cousVeg = Recipe.create("Cous cous con verdure di stagione");
 
+//        monday.assignRecipe(MealType.BREAKFAST, oatmeal);
+//        monday.assignRecipe(MealType.SNACK, appleSnack);
+//        monday.assignRecipe(MealType.LUNCH, pastaCeci);
+//        monday.assignRecipe(MealType.SNACK, nutsSnack);
+//        monday.assignRecipe(MealType.DINNER, fishVeg);
+//        monday.assignRecipe(MealType.SNACK, nutsSnack);
+//        tuesday.assignRecipe(MealType.BREAKFAST, yogurtBreakfast);
+//        tuesday.assignRecipe(MealType.SNACK, orangeSnack);
+//        tuesday.assignRecipe(MealType.LUNCH, cousVeg);
+//        tuesday.assignRecipe(MealType.SNACK, bananaSnack);
+        MealPlan plan = new MealPlan(LocalDate.now());
+
         DayPlan monday = new DayPlan(DayOfWeek.MONDAY);
         DayPlan tuesday = new DayPlan(DayOfWeek.TUESDAY);
-
-        monday.assignRecipe(MealType.BREAKFAST, oatmeal);
-        monday.assignRecipe(MealType.SNACK, appleSnack);
-        monday.assignRecipe(MealType.LUNCH, pastaCeci);
-        monday.assignRecipe(MealType.SNACK, nutsSnack);
-        monday.assignRecipe(MealType.DINNER, fishVeg);
-        monday.assignRecipe(MealType.SNACK, nutsSnack);
-        tuesday.assignRecipe(MealType.BREAKFAST, yogurtBreakfast);
-        tuesday.assignRecipe(MealType.SNACK, orangeSnack);
-        tuesday.assignRecipe(MealType.LUNCH, cousVeg);
-        tuesday.assignRecipe(MealType.SNACK, bananaSnack);
-        MealPlan plan = new MealPlan(LocalDate.now());
         plan.addDayPlan(monday);
         plan.addDayPlan(tuesday);
+        plan.assignRecipeAuto(DayOfWeek.MONDAY,MealType.SNACK, appleSnack);
+        plan.assignRecipeAuto(DayOfWeek.MONDAY,MealType.SNACK, appleSnack);
+        plan.assignRecipeAuto(DayOfWeek.MONDAY,MealType.SNACK, appleSnack);
 
         System.out.println(plan);
     }
