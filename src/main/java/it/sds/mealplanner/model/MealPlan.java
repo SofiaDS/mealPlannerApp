@@ -35,6 +35,14 @@ public class MealPlan {
         days.add(dayPlan);
     }
 
+    public List<MealSlot> getAllMeals() {
+        List<MealSlot> result = new ArrayList<>();
+        for (DayPlan dayPlan : days) {
+            result.addAll(dayPlan.getMeals());
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         return "MealPlan{" +
