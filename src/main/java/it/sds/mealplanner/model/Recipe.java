@@ -1,11 +1,18 @@
 package it.sds.mealplanner.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 public class Recipe {
 
     private static int NEXT_ID = 1; //i want to assign id automatically
 
     private final String id;
     private String name;
+    private final List<RecipeIngredient> ingredients;
+    private String instructions;
 
     // private constructor - dont want to use it externally
     private Recipe(String id, String name) {
@@ -19,6 +26,7 @@ public class Recipe {
         //input sanitization
         this.id = id.trim();
         this.name = name.trim();
+        this.ingredients = new ArrayList<>();
     }
 
     /*
@@ -44,6 +52,31 @@ public class Recipe {
             throw new IllegalArgumentException("Recipe name cannot be null or blank");
         }
         this.name = name.trim();
+    }
+
+    public List<RecipeIngredient> getIngredients(){
+        return Collections.unmodifiableList(ingredients);
+
+    }
+
+    public void addIngredient(Ingredient ingredient, double quantityRequired){
+        if (ingredient == null) {
+            throw new IllegalArgumentException("Ingredient cannot be null");
+        }
+        if (quantityRequired <= 0) {
+            throw new IllegalArgumentException("Quantity required must be > 0");
+        }
+        RecipeIngredient r1 = new RecipeIngredient(ingredient, quantityRequired);
+        ingredients.add(r1);
+
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = (instructions == null) ? null : instructions.trim();
     }
 
     @Override
