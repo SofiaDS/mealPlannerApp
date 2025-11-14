@@ -40,12 +40,15 @@ public class MealPlannerApp {
         plan.addDayPlan(monday);
         plan.addDayPlan(tuesday);
 
-        System.out.println("Meal plan:");
-        System.out.println(plan);
+        //System.out.println("Meal plan:");
+        //System.out.println(plan);
         System.out.println("\nAll meals in the plan:");
         for (MealSlot slot : plan.getAllMeals()) {
             System.out.println(slot.getDay() + ": " + slot);
         }
-
+        System.out.println("\nAll meals in the plan (using Iterable):");
+        for (MealSlot slot : plan) {
+            System.out.println(slot.getDay() + ": " + slot);
+        }
     }
 }

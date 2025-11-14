@@ -7,7 +7,7 @@ import java.util.List;
 * weekly plan 7 days 5 recipes per day
 * */
 
-public class MealPlan {
+public class MealPlan implements Iterable<MealSlot> {
 
     private final LocalDate startDate;
     private final List<DayPlan> days;
@@ -41,6 +41,11 @@ public class MealPlan {
             result.addAll(dayPlan.getMeals());
         }
         return result;
+    }
+
+    @Override
+    public java.util.Iterator<MealSlot> iterator() {
+        return getAllMeals().iterator();
     }
 
     @Override
