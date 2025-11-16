@@ -2,6 +2,8 @@ package it.sds.mealplanner.app;
 
 import it.sds.mealplanner.model.*;
 import it.sds.mealplanner.service.MealPlannerService;
+import it.sds.mealplanner.repository.InMemoryRecipeRepository;
+import it.sds.mealplanner.repository.RecipeRepository;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -10,37 +12,27 @@ public class MealPlannerApp {
 
     public static void main(String[] args) {
 
-        Ingredient pasta = new Ingredient("Pasta", Unit.GRAM);
-        Ingredient ceci = new Ingredient("Ceci", Unit.GRAM);
+import it.sds.mealplanner.repository.InMemoryRecipeRepository;
+import it.sds.mealplanner.repository.RecipeRepository;
 
-        Recipe bigPastaCeci = Recipe.create("Pasta e ceci XL");
-        bigPastaCeci.addIngredient(pasta, 300); // 300g pasta
-        bigPastaCeci.addIngredient(ceci, 100);  // 100g ceci
+// ...
 
-        Pantry pantry = new Pantry();
-        pantry.addStock(pasta, 200);  // solo 200g pasta -> NON basta
-        pantry.addStock(ceci, 150);   // ceci ok
+RecipeRepository recipeRepo = new InMemoryRecipeRepository();
 
-        MealPlan plan = new MealPlan(LocalDate.now());
-        DayPlan monday = new DayPlan(DayOfWeek.MONDAY);
-        plan.addDayPlan(monday);
+Recipe pastaCeci = Recipe.create("Pasta e ceci");
+Recipe oatmeal = Recipe.create("Oatmeal proteico");
+recipeRepo.save(pastaCeci);
+recipeRepo.save(oatmeal);
 
-        MealPlannerService service = new MealPlannerService(pantry);
-        ShoppingList shoppingList = new ShoppingList();
+System.out.println("All recipes in repo:");
+for (Recipe r : recipeRepo.findAll()) {
+    System.out.println("- " + r.getId() + " :: " + r.getName());
+}
 
-        boolean assigned = service.assignRecipeUsingPantry(
-                plan,
-                DayOfWeek.MONDAY,
-                MealType.LUNCH,
-                bigPastaCeci,
-                shoppingList
-        );
+System.out.println("\nRecipes containing 'pasta':");
+for (Recipe r : recipeRepo.findByNameContaining("pasta")) {
+    System.out.println("- " + r.getName());
+}
 
-        System.out.println("Recipe assigned? " + assigned);
-        System.out.println();
-        System.out.println("Current meal plan:");
-        System.out.println(plan);
-        System.out.println();
-        System.out.println(shoppingList);
     }
 }
