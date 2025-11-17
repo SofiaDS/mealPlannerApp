@@ -129,10 +129,17 @@ public class MealPlannerService {
                 .findFirst();
 
         if (maybeRecipe.isEmpty()) {
+            System.out.println("autoAssignFirstCookableRecipe: no cookable recipe for " + type + " on " + startDay);
             return false;
         }
 
         Recipe recipe = maybeRecipe.get();
-        return assignRecipeUsingPantry(plan, startDay, type, recipe);
+        System.out.println("autoAssignFirstCookableRecipe: assigning " + recipe.getName()
+                + " to " + startDay + " " + type);
+
+        boolean assigned = assignRecipeUsingPantry(plan, startDay, type, recipe);
+        System.out.println("  -> assigned? " + assigned);
+        return assigned;
     }
+
 }
