@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "MealPlannerApp",
+            "request": "launch",
+            "mainClass": "it.sds.mealplanner.app.MealPlannerApp",
+            "projectName": "mealplanner"
+        },
+        {
             "type": "jdk",
             "request": "launch",
             "name": "Launch Java App"
