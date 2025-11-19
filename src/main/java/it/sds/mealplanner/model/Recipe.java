@@ -1,9 +1,6 @@
 package it.sds.mealplanner.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Recipe {
 
@@ -13,9 +10,10 @@ public class Recipe {
     private String name;
     private final List<RecipeIngredient> ingredients;
     private String instructions;
+    private final MealType preferredMealType;
 
     // private constructor - dont want to use it externally
-    private Recipe(String id, String name) {
+    private Recipe(String id, String name, MealType preferredMealType) {
         //input check
         if (id == null || id.isBlank()) {
             throw new IllegalArgumentException("Recipe id cannot be null or blank");
@@ -27,11 +25,17 @@ public class Recipe {
         this.id = id.trim();
         this.name = name.trim();
         this.ingredients = new ArrayList<>();
+        this.preferredMealType = Objects.requireNonNull(preferredMealType, "preferredMealType cannot be null");
     }
 
     public static Recipe create(String name) {
+        // default di backward-compatibility: consideriamo LUNCH se non specificato
+        return create(name, MealType.LUNCH);
+    }
+
+    public static Recipe create(String name, MealType preferredMealType) {
         String id = "R" + NEXT_ID++;  // es: R1, R2, R3...
-        return new Recipe(id, name);
+        return new Recipe(id, name, preferredMealType);
     }
 
     public String getId() {
@@ -40,6 +44,10 @@ public class Recipe {
 
     public String getName() {
         return name;
+    }
+
+    public MealType getPreferredMealType() {
+        return preferredMealType;
     }
 
     public void setName(String name) {

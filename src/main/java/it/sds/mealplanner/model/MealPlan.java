@@ -19,10 +19,6 @@ public class MealPlan {
         this.startDate = startDate;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
     public void addDayPlan(DayPlan dayPlan) {
         if (dayPlan == null) {
             throw new IllegalArgumentException("DayPlan cannot be null");
@@ -31,9 +27,6 @@ public class MealPlan {
     }
 
     public DayPlan getDayPlan(DayOfWeek day) {
-        if (day == null) {
-            throw new IllegalArgumentException("DayOfWeek cannot be null");
-        }
         return days.get(day);
     }
 
@@ -41,9 +34,13 @@ public class MealPlan {
         return Collections.unmodifiableCollection(days.values());
     }
 
-    public boolean assignRecipeAuto(DayOfWeek startDay, MealType type, Recipe recipe) {
-        if (startDay == null) {
-            throw new IllegalArgumentException("Start day cannot be null");
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public boolean assignRecipeAuto(DayOfWeek day, MealType type, Recipe recipe) {
+        if (day == null) {
+            throw new IllegalArgumentException("Day cannot be null");
         }
         if (type == null) {
             throw new IllegalArgumentException("Meal type cannot be null");
@@ -52,17 +49,14 @@ public class MealPlan {
             throw new IllegalArgumentException("Recipe cannot be null");
         }
 
-        DayOfWeek current = startDay;
-
-        for (int i = 0; i < 7; i++) { // giro al massimo 1 settimana
-            DayPlan dp = days.get(current);
-            if (dp != null && dp.tryAssignRecipe(type, recipe)) {
-                return true;
-            }
-            current = current.plus(1);
+        DayPlan dayPlan = days.get(day);
+        if (dayPlan == null) {
+            return false;
         }
-        return false;
+
+        return dayPlan.tryAssignRecipe(type, recipe);
     }
+
 
     @Override
     public String toString() {

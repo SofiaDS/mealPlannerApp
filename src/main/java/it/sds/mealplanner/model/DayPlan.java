@@ -17,7 +17,7 @@ public class DayPlan {
         this.day = day;
         this.meals = new ArrayList<>();
 
-        // struttura fissa
+        // ordine fisso: B, S, L, S, D
         meals.add(new MealSlot(day, MealType.BREAKFAST, null));
         meals.add(new MealSlot(day, MealType.SNACK, null));
         meals.add(new MealSlot(day, MealType.LUNCH, null));
@@ -29,47 +29,42 @@ public class DayPlan {
         return day;
     }
 
-/**
- * Returns an unmodifiable list of MealSlot objects that represent the plan for the day.
- * @return an unmodifiable list of MealSlot objects
- */
     public List<MealSlot> getMeals() {
         return Collections.unmodifiableList(meals);
     }
 
-    /**
-     * Tries to assign the given recipe to the meal slot of the given meal type.
-     * If the meal type is not SNACK, the method tries to assign the recipe to the first meal slot of the given meal type.
-     * If the meal type is SNACK, the method tries to assign the recipe to the first meal slot of the SNACK meal type that does not already have a recipe assigned.
-     * If a suitable meal slot is found, the method assigns the recipe to the meal slot and returns true.
-     * Otherwise, the method returns false.
-     * @param type the meal type to assign the recipe to
-     * @param recipe the recipe to assign
-     * @return true if a suitable meal slot was found and the recipe was assigned, false otherwise
-     * @throws IllegalArgumentException if type is null
-     **/
-    public boolean tryAssignRecipe(MealType type, Recipe recipe) {
+  public boolean tryAssignRecipe(MealType type, Recipe recipe) {
         if (type == null) {
             throw new IllegalArgumentException("Meal type cannot be null");
         }
+        if (recipe == null) {
+            throw new IllegalArgumentException("Recipe cannot be null");
+        }
+      System.out.println("    [DayPlan] tryAssignRecipe day=" + day
+              + " type=" + type
+              + " recipe=" + recipe.getName());
 
-        if (type != MealType.SNACK) {
-            for (MealSlot slot : meals) {
-                if (slot.getType() == type) {
-                    slot.setRecipe(recipe);
-                    return true;
-                }
-            }
-            return false;
-        } else {
+        if (type == MealType.SNACK) {
             for (MealSlot slot : meals) {
                 if (slot.getType() == MealType.SNACK && slot.getRecipe() == null) {
+                    System.out.println("    [DayPlan]  -> assegno a SNACK slot (day=" + day + ")");
                     slot.setRecipe(recipe);
                     return true;
                 }
             }
+            System.out.println("    [DayPlan]  -> nessuno SNACK libero per " + day);
             return false;
         }
+
+        for (MealSlot slot : meals) {
+            if (slot.getType() == type) {
+                System.out.println("    [DayPlan]  -> assegno a " + type + " (day=" + day + ")");
+                slot.setRecipe(recipe);
+                return true;
+            }
+        }
+      System.out.println("    [DayPlan]  -> nessuno slot per type=" + type + " su day=" + day);
+      return false;
     }
 
     @Override
