@@ -11,6 +11,7 @@ public class MealPlan {
 
     private final LocalDate startDate;
     private final Map<DayOfWeek, DayPlan> days = new EnumMap<>(DayOfWeek.class);
+    public static final String VERSION = "MealPlan v6";
 
     public MealPlan(LocalDate startDate) {
         if (startDate == null) {

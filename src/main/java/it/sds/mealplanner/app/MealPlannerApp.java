@@ -2,7 +2,6 @@ package it.sds.mealplanner.app;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 import it.sds.mealplanner.model.*;
@@ -59,6 +58,7 @@ public class MealPlannerApp {
         fruitSalad.addIngredient(mela, 2);
         fruitSalad.addIngredient(banana, 1);
         fruitSalad.addIngredient(lettuce, 50);
+
         // --- main ---
         Recipe pastaCeci = Recipe.create("Pasta e ceci", MealType.LUNCH);
         pastaCeci.addIngredient(pasta, 80);
@@ -82,7 +82,6 @@ public class MealPlannerApp {
         coldSalad.addIngredient(rucola,150);
         coldSalad.addIngredient(lettuce, 150);
         coldSalad.addIngredient(egg,2);
-
 
         // --- Recipe Repository ---
         RecipeRepository recipeRepo = new InMemoryRecipeRepository();
@@ -113,38 +112,29 @@ public class MealPlannerApp {
         pantry.addStock(banana,5);
         pantry.addStock(pear,1);
 
-        MealPlan weeklyPlan = new MealPlan(LocalDate.now());
+        // --- Meal plan for the whole week ---
+        MealPlan plan = new MealPlan(LocalDate.now());
         for (DayOfWeek day : DayOfWeek.values()) {
-            weeklyPlan.addDayPlan(new DayPlan(day));
+            plan.addDayPlan(new DayPlan(day));
         }
 
-        MealPlannerService plannerService = new MealPlannerService(pantry, recipeRepo);
+        // --- Service ---
+        MealPlannerService service = new MealPlannerService(pantry, recipeRepo);
+
+        // Popola automaticamente il piano usando la strategy
         for (DayOfWeek day : DayOfWeek.values()) {
             for (MealType type : MealType.values()) {
-                boolean assigned = plannerService.autoAssignAnyRecipe(weeklyPlan, day, type);
-                if (!assigned) {
-                    System.out.println("Nessuna ricetta assegnata per " + day + " - " + type);
-                }
-            }
-        }
-        List<Recipe> allRecipes = recipeRepo.findAll();
-        int index = 0;
-
-        for (DayOfWeek day : DayOfWeek.values()) {
-            for (MealType type : MealType.values()) {
-                Recipe recipe = allRecipes.get(index % allRecipes.size());
-                index++;
-
-                boolean assigned = weeklyPlan.assignRecipeAuto(day, type, recipe);
+                boolean assigned = service.autoAssignAnyRecipe(plan, day, type);
                 if (!assigned) {
                     System.out.println("Nessuna ricetta assegnata per " + day + " - " + type);
                 }
             }
         }
 
-        System.out.println("===== MEAL PLAN V3=====");
+        // Stampa del meal plan
+        System.out.println("===== MEAL PLAN =====");
         for (DayOfWeek day : DayOfWeek.values()) {
-            DayPlan dayPlan = weeklyPlan.getDayPlan(day);
+            DayPlan dayPlan = plan.getDayPlan(day);
             System.out.println("\n" + day + ":");
             if (dayPlan == null) {
                 System.out.println("  (nessun pasto)");
@@ -159,7 +149,8 @@ public class MealPlannerApp {
             }
         }
 
-        ShoppingList globalShoppingList = plannerService.buildShoppingListForPlan(weeklyPlan);
+        // Shopping list globale
+        ShoppingList globalShoppingList = service.buildShoppingListForPlan(plan);
 
         System.out.println("\n===== SHOPPING LIST GLOBALE =====");
         Map<Ingredient, Double> items = globalShoppingList.getItems();
