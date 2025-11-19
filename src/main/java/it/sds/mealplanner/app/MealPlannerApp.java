@@ -142,7 +142,7 @@ public class MealPlannerApp {
             }
         }
 
-        System.out.println("===== MEAL PLAN =====");
+        System.out.println("===== MEAL PLAN V3=====");
         for (DayOfWeek day : DayOfWeek.values()) {
             DayPlan dayPlan = weeklyPlan.getDayPlan(day);
             System.out.println("\n" + day + ":");
