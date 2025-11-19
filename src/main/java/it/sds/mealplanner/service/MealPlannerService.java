@@ -75,12 +75,6 @@ public class MealPlannerService {
         return assignRecipeUsingPantry(plan, startDay, type, recipe, new ShoppingList());
     }
 
-    /**
-     * Restituisce la prima ricetta disponibile nel repository.
-     * Nota: in passato filtrava in base alla Pantry (solo ricette "cookable"),
-     * ma con il nuovo modello di pianificazione il MealPlan non dipende più dalla dispensa.
-     * Per questo motivo non applichiamo più il filtro sulla Pantry.
-     */
     @Deprecated
     public Optional<Recipe> findFirstCookableRecipe() {
         return recipeRepository.findAll()
@@ -103,6 +97,7 @@ public class MealPlannerService {
 
         var recipes = recipeRepository.findAll();
         if (recipes.isEmpty()) {
+            System.out.println("autoAssignAnyRecipe: nessuna ricetta nel repository");
             return false;
         }
 
@@ -115,10 +110,17 @@ public class MealPlannerService {
         );
 
         if (recipe == null) {
-            return false;
+            recipe = recipes.getFirst();
+            System.out.println("autoAssignAnyRecipe: strategy ha restituito null, uso fallback -> "
+                    + recipe.getName());
+        } else {
+            System.out.println("autoAssignAnyRecipe: strategy ha scelto -> "
+                    + recipe.getName() + " per " + startDay + " " + type);
         }
+
         return plan.assignRecipeAuto(startDay, type, recipe);
     }
+
 
     public ShoppingList buildShoppingListForPlan(MealPlan plan, Pantry pantry) {
         if (plan == null) {

@@ -1,12 +1,12 @@
 package it.sds.mealplanner.strategy;
 
 import it.sds.mealplanner.model.*;
-
 import java.time.DayOfWeek;
 import java.util.List;
 
 public interface RecipeSelectionStrategy {
-    Recipe selectRecipe(List<Recipe> recipes,
+
+    Recipe selectRecipe(List<Recipe> allRecipes,
                         MealPlan plan,
                         DayOfWeek day,
                         MealType type,

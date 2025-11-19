@@ -119,7 +119,14 @@ public class MealPlannerApp {
         }
 
         MealPlannerService service = new MealPlannerService(pantry, recipeRepo);
-
+        for (DayOfWeek day : DayOfWeek.values()) {
+            for (MealType type : MealType.values()) {
+                boolean assigned = service.autoAssignAnyRecipe(plan, day, type);
+                if (!assigned) {
+                    System.out.println("Nessuna ricetta assegnata per " + day + " - " + type);
+                }
+            }
+        }
         List<Recipe> allRecipes = recipeRepo.findAll();
         int index = 0;
 
