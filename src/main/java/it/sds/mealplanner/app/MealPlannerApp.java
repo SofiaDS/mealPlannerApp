@@ -44,19 +44,15 @@ public class MealPlannerApp {
         // --- snacks ---
         Recipe appleSnack = Recipe.create("Apple snack", MealType.SNACK);
         appleSnack.addIngredient(mela, 1);
-        appleSnack.setNutritionFacts(new NutritionFacts(95,1,25,0));
 
         Recipe orangeSnack = Recipe.create("Orange snack", MealType.SNACK);
         orangeSnack.addIngredient(orange, 1);
-        orangeSnack.setNutritionFacts(new NutritionFacts(70,1.3,15,0.2));
 
         Recipe pearSnack = Recipe.create("Pear snack", MealType.SNACK);
         pearSnack.addIngredient(pear, 1);
-        pearSnack.setNutritionFacts(new NutritionFacts(101,1,27,0));
 
         Recipe bananaSnack = Recipe.create("Banana snack", MealType.SNACK);
         bananaSnack.addIngredient(banana, 1);
-        bananaSnack.setNutritionFacts(new NutritionFacts(110,1,27,0));
 
         Recipe bananaY = Recipe.create("Greek yoghurt and fruit", MealType.BREAKFAST);
         bananaY.addIngredient(greekY,150);
