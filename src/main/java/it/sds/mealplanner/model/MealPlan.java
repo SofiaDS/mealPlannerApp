@@ -11,13 +11,22 @@ public class MealPlan {
 
     private final LocalDate startDate;
     private final Map<DayOfWeek, DayPlan> days = new EnumMap<>(DayOfWeek.class);
-    public static final String VERSION = "MealPlan v6";
+    private final Double maxDailyCalories;
 
     public MealPlan(LocalDate startDate) {
+        this(startDate, null);
+    }
+
+    public MealPlan(LocalDate startDate, Double maxDailyCalories) {
         if (startDate == null) {
             throw new IllegalArgumentException("Start date cannot be null");
         }
         this.startDate = startDate;
+        this.maxDailyCalories = maxDailyCalories;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
     public void addDayPlan(DayPlan dayPlan) {
@@ -35,8 +44,12 @@ public class MealPlan {
         return Collections.unmodifiableCollection(days.values());
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public Double getMaxDailyCalories() {
+        return maxDailyCalories;
+    }
+
+    public boolean hasCalorieLimit() {
+        return maxDailyCalories != null;
     }
 
     @Override

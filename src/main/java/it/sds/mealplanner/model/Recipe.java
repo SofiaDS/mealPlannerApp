@@ -9,8 +9,9 @@ public class Recipe {
     private final String id;
     private String name;
     private final List<RecipeIngredient> ingredients;
-    private String instructions;
     private final MealType preferredMealType;
+
+    private final Set<DietaryTag> tags;
 
     // private constructor - dont want to use it externally
     private Recipe(String id, String name, MealType preferredMealType) {
@@ -26,6 +27,7 @@ public class Recipe {
         this.name = name.trim();
         this.ingredients = new ArrayList<>();
         this.preferredMealType = Objects.requireNonNull(preferredMealType, "preferredMealType cannot be null");
+        this.tags = new HashSet<>();
     }
 
     public static Recipe create(String name) {
@@ -80,12 +82,64 @@ public class Recipe {
 
     }
 
-    public String getInstructions() {
-        return instructions;
+    public Set<DietaryTag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
-    public void setInstructions(String instructions) {
-        this.instructions = (instructions == null) ? null : instructions.trim();
+    public void addTag(DietaryTag tag) {
+        if (tag == null) {
+            throw new IllegalArgumentException("Tag cannot be null");
+        }
+        tags.add(tag);
+    }
+
+    public void addTags(Collection<DietaryTag> tagsToAdd) {
+        if (tagsToAdd == null) {
+            throw new IllegalArgumentException("Tags collection cannot be null");
+        }
+        for (DietaryTag tag : tagsToAdd) {
+            if (tag == null) {
+                throw new IllegalArgumentException("Tag in collection cannot be null");
+            }
+        }
+        tags.addAll(tagsToAdd);
+    }
+
+    public NutritionFacts computeNutritionFacts() {
+        double totalKcal = 0.0;
+        double totalProtein = 0.0;
+        double totalCarbs = 0.0;
+        double totalFat = 0.0;
+
+        for (RecipeIngredient ri : ingredients) {
+            Ingredient ing = ri.getIngredient();
+            double qty = ri.getQuantityRequired();
+            NutritionFacts perUnit = ing.getNutritionPerUnit();
+
+            if (perUnit == null) {
+                continue;
+            }
+
+            double factor = computeFactor(ing.getUnit(), qty);
+
+            totalKcal    += perUnit.getCalories() * factor;
+            totalProtein += perUnit.getProtein()  * factor;
+            totalCarbs   += perUnit.getCarbs()    * factor;
+            totalFat     += perUnit.getFat()      * factor;
+        }
+
+        return new NutritionFacts(totalKcal, totalProtein, totalCarbs, totalFat);
+    }
+
+    private double computeFactor(Unit unit, double qty) {
+        switch (unit) {
+            case GRAM:
+                return qty / 100.0;
+            case PIECE:
+                return qty;
+            default:
+                return qty;
+        }
     }
 
     @Override

@@ -130,14 +130,24 @@ public class MealPlannerService {
             throw new IllegalArgumentException("Meal type cannot be null");
         }
 
-        var recipes = recipeRepository.findAll();
-        if (recipes.isEmpty()) {
+        var allRecipes = recipeRepository.findAll();
+        if (allRecipes.isEmpty()) {
             System.out.println("autoAssignAnyRecipe: nessuna ricetta nel repository");
             return false;
         }
 
+        var candidates = allRecipes.stream()
+                .filter(r -> !wouldExceedDailyCalories(plan, startDay, r))
+                .toList();
+
+        if (candidates.isEmpty()) {
+            System.out.println("autoAssignAnyRecipe: nessuna ricetta compatibile con il limite kcal per "
+                    + startDay + " " + type);
+            return false;
+        }
+
         Recipe recipe = recipeSelectionStrategy.selectRecipe(
-                recipes,
+                candidates,
                 plan,
                 startDay,
                 type,
@@ -145,16 +155,12 @@ public class MealPlannerService {
         );
 
         if (recipe == null) {
-            System.out.println("autoAssignAnyRecipe: strategy ha restituito null per "
-                    + startDay + " " + type);
             return false;
         }
 
-        System.out.println("autoAssignAnyRecipe: strategy ha scelto -> "
-                + recipe.getName() + " per " + startDay + " " + type);
-
         return assignToPlan(plan, startDay, type, recipe);
     }
+
 
     public ShoppingList buildShoppingListForPlan(MealPlan plan) {
         if (plan == null) {
@@ -223,4 +229,44 @@ public class MealPlannerService {
 
         return dayPlan.tryAssignRecipe(type, recipe);
     }
+
+    private double calculateDailyCalories(MealPlan plan, DayOfWeek day) {
+        DayPlan dayPlan = plan.getDayPlan(day);
+        if (dayPlan == null) {
+            return 0.0;
+        }
+
+        double total = 0.0;
+        for (MealSlot slot : dayPlan.getMeals()) {
+            Recipe r = slot.getRecipe();
+            if (r == null) {
+                continue;
+            }
+            NutritionFacts nf = r.computeNutritionFacts();
+            if (nf != null) {
+                total += nf.getCalories();
+            }
+        }
+        return total;
+    }
+
+    private boolean wouldExceedDailyCalories(MealPlan plan, DayOfWeek day, Recipe candidate) {
+        if (!plan.hasCalorieLimit()) {
+            return false; // nessun limite, tutto ok
+        }
+
+        NutritionFacts nf = candidate.computeNutritionFacts();
+        if (nf == null) {
+            // scelta: se c'è un limite, consideriamo 0 kcal se non abbiamo dati
+            // (se vuoi essere più rigida, puoi restituire true qui)
+            return false;
+        }
+
+        double current = calculateDailyCalories(plan, day);
+        double candidateCalories = nf.getCalories();
+        Double limit = plan.getMaxDailyCalories();
+
+        return (limit != null) && (current + candidateCalories > limit);
+    }
+
 }
