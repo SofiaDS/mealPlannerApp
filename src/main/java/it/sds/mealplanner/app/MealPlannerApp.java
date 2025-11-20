@@ -121,7 +121,6 @@ public class MealPlannerApp {
         // --- Service ---
         MealPlannerService service = new MealPlannerService(pantry, recipeRepo);
 
-        // Popola automaticamente il piano usando la strategy
         for (DayOfWeek day : DayOfWeek.values()) {
             for (MealType type : MealType.values()) {
                 boolean assigned = service.autoAssignAnyRecipe(plan, day, type);
@@ -131,7 +130,6 @@ public class MealPlannerApp {
             }
         }
 
-        // Stampa del meal plan
         System.out.println("===== MEAL PLAN =====");
         for (DayOfWeek day : DayOfWeek.values()) {
             DayPlan dayPlan = plan.getDayPlan(day);

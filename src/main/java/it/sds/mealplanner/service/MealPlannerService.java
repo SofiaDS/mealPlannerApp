@@ -6,6 +6,7 @@ import it.sds.mealplanner.strategy.RecipeSelectionStrategy;
 import it.sds.mealplanner.strategy.RotatingRecipeSelectionStrategy;
 
 import java.time.DayOfWeek;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -61,11 +62,11 @@ public class MealPlannerService {
 
         if (!missing.isEmpty()) {
             shoppingList.addAll(missing);
+            return false;
         }
 
-        plan.assignRecipeAuto(startDay, type, recipe);
-
-        return missing.isEmpty();
+        pantry.consumeForRecipe(recipe);
+        return assignToPlan(plan, startDay, type, recipe);
     }
 
     public boolean assignRecipeUsingPantry(MealPlan plan,
@@ -75,11 +76,45 @@ public class MealPlannerService {
         return assignRecipeUsingPantry(plan, startDay, type, recipe, new ShoppingList());
     }
 
-    @Deprecated
     public Optional<Recipe> findFirstCookableRecipe() {
         return recipeRepository.findAll()
                 .stream()
+                .filter(pantry::canMakeRecipe)
                 .findFirst();
+    }
+
+    public boolean autoAssignFirstCookableRecipe(MealPlan plan,
+                                                 DayOfWeek startDay,
+                                                 MealType type) {
+        if (plan == null) {
+            throw new IllegalArgumentException("MealPlan cannot be null");
+        }
+        if (startDay == null) {
+            throw new IllegalArgumentException("Start day cannot be null");
+        }
+        if (type == null) {
+            throw new IllegalArgumentException("Meal type cannot be null");
+        }
+
+        Optional<Recipe> maybeRecipe = recipeRepository.findAll()
+                .stream()
+                .filter(pantry::canMakeRecipe)
+                .findFirst();
+
+        if (maybeRecipe.isEmpty()) {
+            System.out.println("autoAssignFirstCookableRecipe: no cookable recipe for "
+                    + type + " on " + startDay);
+            return false;
+        }
+
+        Recipe recipe = maybeRecipe.get();
+        System.out.println("autoAssignFirstCookableRecipe: assigning " + recipe.getName()
+                + " to " + startDay + " " + type);
+
+        ShoppingList tmpList = new ShoppingList();
+        boolean assigned = assignRecipeUsingPantry(plan, startDay, type, recipe, tmpList);
+        System.out.println("  -> assigned? " + assigned);
+        return assigned;
     }
 
     public boolean autoAssignAnyRecipe(MealPlan plan,
@@ -110,27 +145,23 @@ public class MealPlannerService {
         );
 
         if (recipe == null) {
-            recipe = recipes.getFirst();
-            System.out.println("autoAssignAnyRecipe: strategy ha restituito null, uso fallback -> "
-                    + recipe.getName());
-        } else {
-            System.out.println("autoAssignAnyRecipe: strategy ha scelto -> "
-                    + recipe.getName() + " per " + startDay + " " + type);
+            System.out.println("autoAssignAnyRecipe: strategy ha restituito null per "
+                    + startDay + " " + type);
+            return false;
         }
 
-        return plan.assignRecipeAuto(startDay, type, recipe);
+        System.out.println("autoAssignAnyRecipe: strategy ha scelto -> "
+                + recipe.getName() + " per " + startDay + " " + type);
+
+        return assignToPlan(plan, startDay, type, recipe);
     }
 
-
-    public ShoppingList buildShoppingListForPlan(MealPlan plan, Pantry pantry) {
+    public ShoppingList buildShoppingListForPlan(MealPlan plan) {
         if (plan == null) {
             throw new IllegalArgumentException("MealPlan cannot be null");
         }
-        if (pantry == null) {
-            throw new IllegalArgumentException("Pantry cannot be null");
-        }
 
-        Map<Ingredient, Double> totalRequired = new java.util.HashMap<>();
+        Map<Ingredient, Double> totalRequired = new HashMap<>();
 
         for (DayOfWeek day : DayOfWeek.values()) {
             DayPlan dayPlan = plan.getDayPlan(day);
@@ -152,7 +183,7 @@ public class MealPlannerService {
             }
         }
 
-       ShoppingList shoppingList = new ShoppingList();
+        ShoppingList shoppingList = new ShoppingList();
 
         for (Map.Entry<Ingredient, Double> entry : totalRequired.entrySet()) {
             Ingredient ing = entry.getKey();
@@ -168,8 +199,28 @@ public class MealPlannerService {
         return shoppingList;
     }
 
-    public ShoppingList buildShoppingListForPlan(MealPlan plan) {
-        return buildShoppingListForPlan(plan, this.pantry);
-    }
+    private boolean assignToPlan(MealPlan plan,
+                                 DayOfWeek day,
+                                 MealType type,
+                                 Recipe recipe) {
+        if (plan == null) {
+            throw new IllegalArgumentException("MealPlan cannot be null");
+        }
+        if (day == null) {
+            throw new IllegalArgumentException("Day cannot be null");
+        }
+        if (type == null) {
+            throw new IllegalArgumentException("Meal type cannot be null");
+        }
+        if (recipe == null) {
+            throw new IllegalArgumentException("Recipe cannot be null");
+        }
 
+        DayPlan dayPlan = plan.getDayPlan(day);
+        if (dayPlan == null) {
+            return false;
+        }
+
+        return dayPlan.tryAssignRecipe(type, recipe);
+    }
 }

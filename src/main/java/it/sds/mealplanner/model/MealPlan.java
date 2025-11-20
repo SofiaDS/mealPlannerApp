@@ -39,26 +39,6 @@ public class MealPlan {
         return startDate;
     }
 
-    public boolean assignRecipeAuto(DayOfWeek day, MealType type, Recipe recipe) {
-        if (day == null) {
-            throw new IllegalArgumentException("Day cannot be null");
-        }
-        if (type == null) {
-            throw new IllegalArgumentException("Meal type cannot be null");
-        }
-        if (recipe == null) {
-            throw new IllegalArgumentException("Recipe cannot be null");
-        }
-
-        DayPlan dayPlan = days.get(day);
-        if (dayPlan == null) {
-            return false;
-        }
-
-        return dayPlan.tryAssignRecipe(type, recipe);
-    }
-
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("WEEK PLAN\n");
