@@ -37,86 +37,6 @@ public class MealPlannerService {
         this(pantry, recipeRepository, new RotatingRecipeSelectionStrategy());
     }
 
-    public boolean assignRecipeUsingPantry(MealPlan plan,
-                                           DayOfWeek startDay,
-                                           MealType type,
-                                           Recipe recipe,
-                                           ShoppingList shoppingList) {
-        if (plan == null) {
-            throw new IllegalArgumentException("MealPlan cannot be null");
-        }
-        if (startDay == null) {
-            throw new IllegalArgumentException("Start day cannot be null");
-        }
-        if (type == null) {
-            throw new IllegalArgumentException("Meal type cannot be null");
-        }
-        if (recipe == null) {
-            throw new IllegalArgumentException("Recipe cannot be null");
-        }
-        if (shoppingList == null) {
-            throw new IllegalArgumentException("ShoppingList cannot be null");
-        }
-
-        Map<Ingredient, Double> missing = pantry.calculateMissingForRecipe(recipe);
-
-        if (!missing.isEmpty()) {
-            shoppingList.addAll(missing);
-            return false;
-        }
-
-        pantry.consumeForRecipe(recipe);
-        return assignToPlan(plan, startDay, type, recipe);
-    }
-
-    public boolean assignRecipeUsingPantry(MealPlan plan,
-                                           DayOfWeek startDay,
-                                           MealType type,
-                                           Recipe recipe) {
-        return assignRecipeUsingPantry(plan, startDay, type, recipe, new ShoppingList());
-    }
-
-    public Optional<Recipe> findFirstCookableRecipe() {
-        return recipeRepository.findAll()
-                .stream()
-                .filter(pantry::canMakeRecipe)
-                .findFirst();
-    }
-
-    public boolean autoAssignFirstCookableRecipe(MealPlan plan,
-                                                 DayOfWeek startDay,
-                                                 MealType type) {
-        if (plan == null) {
-            throw new IllegalArgumentException("MealPlan cannot be null");
-        }
-        if (startDay == null) {
-            throw new IllegalArgumentException("Start day cannot be null");
-        }
-        if (type == null) {
-            throw new IllegalArgumentException("Meal type cannot be null");
-        }
-
-        Optional<Recipe> maybeRecipe = recipeRepository.findAll()
-                .stream()
-                .filter(pantry::canMakeRecipe)
-                .findFirst();
-
-        if (maybeRecipe.isEmpty()) {
-            System.out.println("autoAssignFirstCookableRecipe: no cookable recipe for "
-                    + type + " on " + startDay);
-            return false;
-        }
-
-        Recipe recipe = maybeRecipe.get();
-        System.out.println("autoAssignFirstCookableRecipe: assigning " + recipe.getName()
-                + " to " + startDay + " " + type);
-
-        ShoppingList tmpList = new ShoppingList();
-        boolean assigned = assignRecipeUsingPantry(plan, startDay, type, recipe, tmpList);
-        System.out.println("  -> assigned? " + assigned);
-        return assigned;
-    }
-
     public boolean autoAssignAnyRecipe(MealPlan plan,
                                        DayOfWeek startDay,
                                        MealType type) {
@@ -230,6 +150,21 @@ public class MealPlannerService {
         return dayPlan.tryAssignRecipe(type, recipe);
     }
 
+    public void autoAssignDayWithTwoSnacks(MealPlan plan, DayOfWeek day) {
+        if (plan == null) {
+            throw new IllegalArgumentException("MealPlan cannot be null");
+        }
+        if (day == null) {
+            throw new IllegalArgumentException("Day cannot be null");
+        }
+
+        autoAssignAnyRecipe(plan, day, MealType.BREAKFAST);
+        autoAssignAnyRecipe(plan, day, MealType.SNACK);
+        autoAssignAnyRecipe(plan, day, MealType.LUNCH);
+        autoAssignAnyRecipe(plan, day, MealType.SNACK);
+        autoAssignAnyRecipe(plan, day, MealType.DINNER);
+    }
+
     private double calculateDailyCalories(MealPlan plan, DayOfWeek day) {
         DayPlan dayPlan = plan.getDayPlan(day);
         if (dayPlan == null) {
@@ -244,7 +179,7 @@ public class MealPlannerService {
             }
             NutritionFacts nf = r.computeNutritionFacts();
             if (nf != null) {
-                total += nf.getCalories();
+                total += nf.calories();
             }
         }
         return total;
@@ -263,7 +198,7 @@ public class MealPlannerService {
         }
 
         double current = calculateDailyCalories(plan, day);
-        double candidateCalories = nf.getCalories();
+        double candidateCalories = nf.calories();
         Double limit = plan.getMaxDailyCalories();
 
         return (limit != null) && (current + candidateCalories > limit);

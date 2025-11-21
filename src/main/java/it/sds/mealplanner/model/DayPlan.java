@@ -40,30 +40,30 @@ public class DayPlan {
         if (recipe == null) {
             throw new IllegalArgumentException("Recipe cannot be null");
         }
-      System.out.println("    [DayPlan] tryAssignRecipe day=" + day
-              + " type=" + type
-              + " recipe=" + recipe.getName());
+//      System.out.println("    [DayPlan] tryAssignRecipe day=" + day
+//              + " type=" + type
+//              + " recipe=" + recipe.getName());
 
         if (type == MealType.SNACK) {
             for (MealSlot slot : meals) {
                 if (slot.getType() == MealType.SNACK && slot.getRecipe() == null) {
-                    System.out.println("    [DayPlan]  -> assegno a SNACK slot (day=" + day + ")");
+                    //System.out.println("    [DayPlan]  -> assegno a SNACK slot (day=" + day + ")");
                     slot.setRecipe(recipe);
                     return true;
                 }
             }
-            System.out.println("    [DayPlan]  -> nessuno SNACK libero per " + day);
+            //System.out.println("    [DayPlan]  -> nessuno SNACK libero per " + day);
             return false;
         }
 
         for (MealSlot slot : meals) {
             if (slot.getType() == type) {
-                System.out.println("    [DayPlan]  -> assegno a " + type + " (day=" + day + ")");
+                //System.out.println("    [DayPlan]  -> assegno a " + type + " (day=" + day + ")");
                 slot.setRecipe(recipe);
                 return true;
             }
         }
-      System.out.println("    [DayPlan]  -> nessuno slot per type=" + type + " su day=" + day);
+      //System.out.println("    [DayPlan]  -> nessuno slot per type=" + type + " su day=" + day);
       return false;
     }
 

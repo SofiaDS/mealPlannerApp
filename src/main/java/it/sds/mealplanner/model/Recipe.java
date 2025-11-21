@@ -9,7 +9,6 @@ public class Recipe {
     private final String id;
     private String name;
     private final List<RecipeIngredient> ingredients;
-    private String instructions;
     private final MealType preferredMealType;
 
     private final Set<DietaryTag> tags;
@@ -53,13 +52,6 @@ public class Recipe {
         return preferredMealType;
     }
 
-    public void setName(String name) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Recipe name cannot be null or blank");
-        }
-        this.name = name.trim();
-    }
-
     public List<RecipeIngredient> getIngredients(){
         return Collections.unmodifiableList(ingredients);
 
@@ -75,14 +67,6 @@ public class Recipe {
         RecipeIngredient r1 = new RecipeIngredient(ingredient, quantityRequired);
         ingredients.add(r1);
 
-    }
-
-    public String getInstructions() {
-        return instructions;
-    }
-
-    public void setInstructions(String instructions) {
-        this.instructions = (instructions == null) ? null : instructions.trim();
     }
 
     public Set<DietaryTag> getTags() {
@@ -125,10 +109,10 @@ public class Recipe {
 
             double factor = computeFactor(ing.getUnit(), qty);
 
-            totalKcal    += perUnit.getCalories() * factor;
-            totalProtein += perUnit.getProtein()  * factor;
-            totalCarbs   += perUnit.getCarbs()    * factor;
-            totalFat     += perUnit.getFat()      * factor;
+            totalKcal    += perUnit.calories() * factor;
+            totalProtein += perUnit.protein()  * factor;
+            totalCarbs   += perUnit.carbs()    * factor;
+            totalFat     += perUnit.fat()      * factor;
         }
 
         return new NutritionFacts(totalKcal, totalProtein, totalCarbs, totalFat);

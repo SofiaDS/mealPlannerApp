@@ -210,7 +210,7 @@ public class MealPlannerApp {
         pantry.addStock(pear,1);
 
         // --- Meal plan for the whole week ---
-        MealPlan plan = new MealPlan(LocalDate.now(), 1300.0);
+        MealPlan plan = new MealPlan(LocalDate.now(), 2000.0);
         for (DayOfWeek day : DayOfWeek.values()) {
             plan.addDayPlan(new DayPlan(day));
         }
@@ -232,17 +232,14 @@ public class MealPlannerApp {
 
         for (DayOfWeek day : DayOfWeek.values()) {
             for (MealType type : MealType.values()) {
-                boolean assigned = service.autoAssignAnyRecipe(plan, day, type);
-                if (!assigned) {
-                    System.out.println("Nessuna ricetta assegnata per " + day + " - " + type);
-                }
+                service.autoAssignDayWithTwoSnacks(plan, day);
             }
         }
 
         System.out.println("===== MEAL PLAN =====");
         for (DayOfWeek day : DayOfWeek.values()) {
             DayPlan dayPlan = plan.getDayPlan(day);
-            //System.out.println("\n" + day + ":");
+            System.out.println("\n" + day + ":");
             if (dayPlan == null) {
                 System.out.println("  (nessun pasto)");
                 continue;
@@ -252,7 +249,7 @@ public class MealPlannerApp {
                 MealType type = slot.getType();
                 Recipe recipe = slot.getRecipe();
                 String recipeName = (recipe != null) ? recipe.getName() : "(vuoto)";
-                //System.out.println("  " + type + " -> " + recipeName);
+                System.out.println("  " + type + " -> " + recipeName);
             }
         }
 

@@ -88,7 +88,7 @@ public class PlainTextExporter {
             }
             NutritionFacts nf = r.computeNutritionFacts();
             if (nf != null) {
-                total += nf.getCalories();
+                total += nf.calories();
             }
         }
         return total;

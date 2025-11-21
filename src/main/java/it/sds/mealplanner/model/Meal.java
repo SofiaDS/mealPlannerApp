@@ -15,10 +15,6 @@ public class Meal {
         return recipe;
     }
 
-    public NutritionProfile getNutritionProfile() {
-        return nutritionProfile;
-    }
-
     @Override
     public String toString() {
         return super.toString();

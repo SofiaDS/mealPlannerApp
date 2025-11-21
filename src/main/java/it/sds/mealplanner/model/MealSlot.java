@@ -20,10 +20,6 @@ public class MealSlot {
         this.recipe = recipe;
     }
 
-    public DayOfWeek getDay() {
-        return day;
-    }
-
     public MealType getType() {
         return type;
     }

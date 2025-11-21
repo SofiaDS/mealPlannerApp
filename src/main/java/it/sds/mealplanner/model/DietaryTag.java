@@ -7,5 +7,5 @@ public enum DietaryTag {
     GLUTEN_FREE,
     HIGH_PROTEIN,
     LOW_CARB,
-    LOW_FAT
+    LOW_FAT,
 }

@@ -40,10 +40,6 @@ public class MealPlan {
         return days.get(day);
     }
 
-    public Collection<DayPlan> getAllDayPlans() {
-        return Collections.unmodifiableCollection(days.values());
-    }
-
     public Double getMaxDailyCalories() {
         return maxDailyCalories;
     }
