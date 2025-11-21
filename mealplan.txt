@@ -1,0 +1,66 @@
+Start date: 2025-11-20
+
+MONDAY (kcal: 1145)
+	BREAKFAST -> Greek yoghurt and fruit
+	SNACK -> Pear snack
+	LUNCH -> Pasta e ceci
+	SNACK -> (vuoto)
+	DINNER -> Cold salad
+
+TUESDAY (kcal: 913)
+	BREAKFAST -> Greek yoghurt and fruit
+	SNACK -> Orange snack
+	LUNCH -> Cold salad
+	SNACK -> (vuoto)
+	DINNER -> Chicken with mushrooms
+
+WEDNESDAY (kcal: 1241)
+	BREAKFAST -> Greek yoghurt and fruit
+	SNACK -> Apple snack
+	LUNCH -> Cous cous with vegetables
+	SNACK -> (vuoto)
+	DINNER -> Chicken with mushrooms
+
+THURSDAY (kcal: 1091)
+	BREAKFAST -> Greek yoghurt and fruit
+	SNACK -> Fruit salad
+	LUNCH -> Chicken with mushrooms
+	SNACK -> (vuoto)
+	DINNER -> Cold salad
+
+FRIDAY (kcal: 952)
+	BREAKFAST -> Greek yoghurt and fruit
+	SNACK -> Banana snack
+	LUNCH -> Grilled orata with rice
+	SNACK -> (vuoto)
+	DINNER -> Cold salad
+
+SATURDAY (kcal: 1145)
+	BREAKFAST -> Greek yoghurt and fruit
+	SNACK -> Pear snack
+	LUNCH -> Pasta e ceci
+	SNACK -> (vuoto)
+	DINNER -> Cold salad
+
+SUNDAY (kcal: 913)
+	BREAKFAST -> Greek yoghurt and fruit
+	SNACK -> Orange snack
+	LUNCH -> Cold salad
+	SNACK -> (vuoto)
+	DINNER -> Chicken with mushrooms
+
+Shopping list:
+- Pumpkin: 100.0 GRAM
+- Chicken: 700.0 GRAM
+- Ceci: 50.0 GRAM
+- Red beans: 80.0 GRAM
+- Mushrooms: 250.0 GRAM
+- Orange: 2.0 PIECE
+- Greek yogurt: 50.0 GRAM
+- Rucola: 900.0 GRAM
+- Mela: 1.0 PIECE
+- Eggs: 12.0 PIECE
+- Pear: 1.0 PIECE
+- Banana: 4.0 PIECE
+- Spinach: 100.0 GRAM
+- Lettuce: 850.0 GRAM

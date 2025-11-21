@@ -9,6 +9,7 @@ public class Recipe {
     private final String id;
     private String name;
     private final List<RecipeIngredient> ingredients;
+    private String instructions;
     private final MealType preferredMealType;
 
     private final Set<DietaryTag> tags;
@@ -64,12 +65,6 @@ public class Recipe {
 
     }
 
-    /**
-     * Adds an ingredient to the recipe.
-     * @param ingredient the ingredient to add; must not be null
-     * @param quantityRequired the quantity of the ingredient required; must be > 0
-     * @throws IllegalArgumentException if the ingredient is null or the quantity is <= 0
-     */
     public void addIngredient(Ingredient ingredient, double quantityRequired){
         if (ingredient == null) {
             throw new IllegalArgumentException("Ingredient cannot be null");
@@ -80,6 +75,14 @@ public class Recipe {
         RecipeIngredient r1 = new RecipeIngredient(ingredient, quantityRequired);
         ingredients.add(r1);
 
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = (instructions == null) ? null : instructions.trim();
     }
 
     public Set<DietaryTag> getTags() {

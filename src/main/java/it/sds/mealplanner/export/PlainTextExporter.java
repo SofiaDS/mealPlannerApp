@@ -26,17 +26,21 @@ public class PlainTextExporter {
 
         try (var writer = Files.newBufferedWriter(outputFile)) {
 
+            // date
             writer.write("Start date: " + plan.getStartDate().format(DATE_FMT));
             writer.newLine();
             writer.newLine();
 
+            // MEAL PLAN
             for (DayOfWeek day : DayOfWeek.values()) {
                 DayPlan dayPlan = plan.getDayPlan(day);
                 if (dayPlan == null) {
                     continue;
                 }
 
-                writer.write(day.name());
+                double dailyKcal = calculateDailyCalories(plan, day);
+
+                writer.write(day.name() + " (kcal: " + Math.round(dailyKcal) + ")");
                 writer.newLine();
 
                 for (MealSlot slot : dayPlan.getMeals()) {
@@ -51,6 +55,7 @@ public class PlainTextExporter {
                 writer.newLine();
             }
 
+            // SHOPPING LIST
             writer.write("Shopping list:");
             writer.newLine();
 
@@ -67,5 +72,25 @@ public class PlainTextExporter {
                 }
             }
         }
+    }
+
+    private double calculateDailyCalories(MealPlan plan, DayOfWeek day) {
+        DayPlan dayPlan = plan.getDayPlan(day);
+        if (dayPlan == null) {
+            return 0.0;
+        }
+
+        double total = 0.0;
+        for (MealSlot slot : dayPlan.getMeals()) {
+            Recipe r = slot.getRecipe();
+            if (r == null) {
+                continue;
+            }
+            NutritionFacts nf = r.computeNutritionFacts();
+            if (nf != null) {
+                total += nf.getCalories();
+            }
+        }
+        return total;
     }
 }
