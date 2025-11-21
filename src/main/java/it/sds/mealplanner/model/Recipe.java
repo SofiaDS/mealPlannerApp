@@ -136,14 +136,11 @@ public class Recipe {
     }
 
     private double computeFactor(Unit unit, double qty) {
-        switch (unit) {
-            case GRAM:
-                return qty / 100.0;
-            case PIECE:
-                return qty;
-            default:
-                return qty;
-        }
+        return switch (unit) {
+            case GRAM -> qty / 100.0;
+            case PIECE -> qty;
+            default -> qty;
+        };
     }
 
     @Override
