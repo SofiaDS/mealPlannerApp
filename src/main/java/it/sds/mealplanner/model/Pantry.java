@@ -4,6 +4,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A class that represents a pantry, which is a store of ingredients.
+ * It provides methods to add and remove ingredients from the pantry.
+ * 
+ * @author Sofia Della Spora
+ * @since 1.0
+ */
 public class Pantry {
 
     private final Map<Ingredient, PantryItem> items = new HashMap<>();
@@ -73,8 +80,7 @@ public class Pantry {
 
         if (!canMakeRecipe(recipe)) {
             throw new IllegalStateException(
-                    "Not enough ingredients in pantry to make recipe: " + recipe.getName()
-            );
+                    "Not enough ingredients in pantry to make recipe: " + recipe.getName());
         }
 
         for (RecipeIngredient ri : recipe.getIngredients()) {

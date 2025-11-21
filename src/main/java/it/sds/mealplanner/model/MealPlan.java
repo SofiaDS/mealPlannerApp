@@ -5,6 +5,16 @@ import java.time.LocalDate;
 import java.util.EnumMap;
 import java.util.Map;
 
+/**
+ * A meal plan is a collection of daily meals.
+ * Each day in the meal plan is associated with a
+ * {@link DayPlan} object, which contains a list of
+ * {@link MealSlot} objects, each representing a meal type
+ * (breakfast, lunch, dinner, snack) and a recipe.
+ *
+ * @author Sofia Della Spora
+ * @version 1.0
+ */
 public class MealPlan {
 
     private final LocalDate startDate;

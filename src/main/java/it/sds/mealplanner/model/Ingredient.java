@@ -1,14 +1,12 @@
 package it.sds.mealplanner.model;
-import java.util.Objects;
 
 public class Ingredient {
     private String name;
     private Unit unit;
     private NutritionFacts nutritionPerUnit;
 
-
-    public Ingredient(String name, Unit unit){
-        this.name = name.trim(); //input sanitization
+    public Ingredient(String name, Unit unit) {
+        this.name = name.trim(); // input sanitization
         this.unit = unit;
     }
 

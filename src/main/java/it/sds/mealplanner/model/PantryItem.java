@@ -1,5 +1,12 @@
 package it.sds.mealplanner.model;
 
+/**
+ * A PantryItem represents an ingredient in the pantry, with its current
+ * quantity.
+ * 
+ * @author Sofia Della Spora
+ * @since 1.0
+ */
 public class PantryItem {
 
     private final Ingredient ingredient;
@@ -20,7 +27,7 @@ public class PantryItem {
         return ingredient;
     }
 
-    public double getQuantityAvailable() {      // 👈 questo è il metodo che Pantry si aspetta
+    public double getQuantityAvailable() { // 👈 questo è il metodo che Pantry si aspetta
         return quantityAvailable;
     }
 

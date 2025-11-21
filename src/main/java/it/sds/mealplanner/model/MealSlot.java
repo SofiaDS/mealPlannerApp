@@ -8,11 +8,11 @@ public class MealSlot {
     private final MealType type;
     private Recipe recipe;
 
-    public MealSlot(DayOfWeek day, MealType type, Recipe recipe){
-        if (day == null){
+    public MealSlot(DayOfWeek day, MealType type, Recipe recipe) {
+        if (day == null) {
             throw new IllegalArgumentException("Day cannot be null");
         }
-        if (type == null){
+        if (type == null) {
             throw new IllegalArgumentException("Meal type cannot be null");
         }
         this.day = day;

@@ -1,7 +1,13 @@
 package it.sds.mealplanner.model;
-/*
-* Meal will have to respect a certain amount of nutritionProfile values
-* */
+
+/**
+ * A meal is a recipe that has been selected for a meal plan.
+ * It has a corresponding recipe and a nutrition profile, which contains
+ * information about the meal's nutritional facts.
+ *
+ * @author Sofia Della Spora
+ * @version 1.0
+ */
 public class Meal {
     private final Recipe recipe;
     private final NutritionProfile nutritionProfile;

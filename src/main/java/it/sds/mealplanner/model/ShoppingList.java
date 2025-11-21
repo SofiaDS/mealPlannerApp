@@ -4,6 +4,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A shopping list is a collection of ingredients and their corresponding
+ * quantities.
+ * The list is used to keep track of the ingredients that need to be purchased.
+ * The list is immutable and can be read only.
+ *
+ * @author Sofia Della Spora
+ * @version 1.0
+ */
 public class ShoppingList {
 
     private final Map<Ingredient, Double> items = new HashMap<>();
@@ -12,8 +21,9 @@ public class ShoppingList {
      * Adds a given quantity of the given ingredient to the list.
      *
      * @param ingredient the ingredient to add
-     * @param quantity the quantity to add
-     * @throws IllegalArgumentException if the ingredient is null or the quantity is not positive
+     * @param quantity   the quantity to add
+     * @throws IllegalArgumentException if the ingredient is null or the quantity is
+     *                                  not positive
      */
     public void addItem(Ingredient ingredient, double quantity) {
         if (ingredient == null) {
@@ -32,7 +42,7 @@ public class ShoppingList {
      * method does nothing.
      *
      * @param missing the items to add, where the key is the ingredient and
-     *            the value is the quantity to add
+     *                the value is the quantity to add
      */
     public void addAll(Map<Ingredient, Double> missing) {
         if (missing == null) {
