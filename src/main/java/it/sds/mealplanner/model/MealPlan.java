@@ -2,8 +2,6 @@ package it.sds.mealplanner.model;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 

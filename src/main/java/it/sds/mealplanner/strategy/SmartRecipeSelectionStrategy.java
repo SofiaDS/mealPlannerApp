@@ -1,10 +1,32 @@
 package it.sds.mealplanner.strategy;
 
-import it.sds.mealplanner.model.*;
-
 import java.time.DayOfWeek;
 import java.util.List;
 
+import it.sds.mealplanner.model.DayPlan;
+import it.sds.mealplanner.model.DietaryTag;
+import it.sds.mealplanner.model.MealPlan;
+import it.sds.mealplanner.model.MealSlot;
+import it.sds.mealplanner.model.MealType;
+import it.sds.mealplanner.model.Pantry;
+import it.sds.mealplanner.model.Recipe;
+import it.sds.mealplanner.model.RecipeIngredient;
+import it.sds.mealplanner.model.UserPreferences;
+
+/**
+ * A RecipeSelectionStrategy that takes into account the user's preferences.
+ * <p>
+ * It will score each recipe based on the following criteria:
+ * <ul>
+ * <li>presence of preferred tags</li>
+ * <li>absence of forbidden tags</li>
+ * <li>absence of excluded ingredients</li>
+ * <li>max same recipe per week</li>
+ * <li>consecutive days with the same recipe</li>
+ * </ul>
+ * <p>
+ * The recipe with the highest score will be chosen.
+ */
 public class SmartRecipeSelectionStrategy implements RecipeSelectionStrategy {
 
     private final UserPreferences preferences;
@@ -18,10 +40,10 @@ public class SmartRecipeSelectionStrategy implements RecipeSelectionStrategy {
 
     @Override
     public Recipe selectRecipe(List<Recipe> candidates,
-                               MealPlan plan,
-                               DayOfWeek day,
-                               MealType type,
-                               Pantry pantry) {
+            MealPlan plan,
+            DayOfWeek day,
+            MealType type,
+            Pantry pantry) {
         if (candidates == null || candidates.isEmpty()) {
             return null;
         }
@@ -41,9 +63,9 @@ public class SmartRecipeSelectionStrategy implements RecipeSelectionStrategy {
     }
 
     private double scoreRecipe(Recipe recipe,
-                               MealPlan plan,
-                               DayOfWeek day,
-                               MealType type) {
+            MealPlan plan,
+            DayOfWeek day,
+            MealType type) {
 
         if (violatesForbiddenTags(recipe) ||
                 containsExcludedIngredient(recipe) ||
@@ -126,9 +148,9 @@ public class SmartRecipeSelectionStrategy implements RecipeSelectionStrategy {
     }
 
     private boolean isUsedPreviousDaySameType(MealPlan plan,
-                                              Recipe recipe,
-                                              DayOfWeek day,
-                                              MealType type) {
+            Recipe recipe,
+            DayOfWeek day,
+            MealType type) {
         DayOfWeek previous = day.minus(1);
         if (previous == day) {
             return false;

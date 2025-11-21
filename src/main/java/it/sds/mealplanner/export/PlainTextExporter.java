@@ -1,7 +1,5 @@
 package it.sds.mealplanner.export;
 
-import it.sds.mealplanner.model.*;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,6 +7,21 @@ import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
+import it.sds.mealplanner.model.DayPlan;
+import it.sds.mealplanner.model.Ingredient;
+import it.sds.mealplanner.model.MealPlan;
+import it.sds.mealplanner.model.MealSlot;
+import it.sds.mealplanner.model.MealType;
+import it.sds.mealplanner.model.NutritionFacts;
+import it.sds.mealplanner.model.Recipe;
+import it.sds.mealplanner.model.ShoppingList;
+
+/**
+ * Exports a meal plan to a plain text file.
+ *
+ * @author Sofia Della Spora
+ * @version 1.0
+ */
 public class PlainTextExporter {
 
     private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd");

@@ -1,15 +1,32 @@
 package it.sds.mealplanner.service;
 
-import it.sds.mealplanner.model.*;
+import java.time.DayOfWeek;
+import java.util.HashMap;
+import java.util.Map;
+
+import it.sds.mealplanner.model.DayPlan;
+import it.sds.mealplanner.model.Ingredient;
+import it.sds.mealplanner.model.MealPlan;
+import it.sds.mealplanner.model.MealSlot;
+import it.sds.mealplanner.model.MealType;
+import it.sds.mealplanner.model.NutritionFacts;
+import it.sds.mealplanner.model.Pantry;
+import it.sds.mealplanner.model.Recipe;
+import it.sds.mealplanner.model.RecipeIngredient;
+import it.sds.mealplanner.model.ShoppingList;
 import it.sds.mealplanner.repository.RecipeRepository;
 import it.sds.mealplanner.strategy.RecipeSelectionStrategy;
 import it.sds.mealplanner.strategy.RotatingRecipeSelectionStrategy;
 
-import java.time.DayOfWeek;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
+/**
+ * This class is responsible for planning meals based on a user's preferences.
+ * It uses a {@link RecipeRepository} to retrieve recipes and a
+ * {@link RecipeSelectionStrategy}
+ * to select the best recipe for each meal.
+ *
+ * @author Sofia Della Spora
+ * @since 1.0
+ */
 public class MealPlannerService {
 
     private final Pantry pantry;
@@ -17,8 +34,8 @@ public class MealPlannerService {
     private final RecipeSelectionStrategy recipeSelectionStrategy;
 
     public MealPlannerService(Pantry pantry,
-                              RecipeRepository recipeRepository,
-                              RecipeSelectionStrategy recipeSelectionStrategy) {
+            RecipeRepository recipeRepository,
+            RecipeSelectionStrategy recipeSelectionStrategy) {
         if (pantry == null) {
             throw new IllegalArgumentException("Pantry cannot be null");
         }
@@ -37,9 +54,25 @@ public class MealPlannerService {
         this(pantry, recipeRepository, new RotatingRecipeSelectionStrategy());
     }
 
+    /**
+     * Assigns a recipe to a meal slot in the given meal plan, provided that the
+     * recipe does not exceed the daily calorie limit.
+     * The assignment is done starting from the given day and meal type.
+     * If no recipe is found that respects the calorie limit, the method returns
+     * false.
+     * If no recipe is found in the repository, the method prints a message and
+     * returns false.
+     * If no recipe is found that is compatible with the given meal type, the method
+     * prints a message and returns false.
+     * 
+     * @param plan     the meal plan to assign the recipe to
+     * @param startDay the day to start assigning the recipe
+     * @param type     the meal type to assign the recipe to
+     * @return true if a recipe was assigned, false otherwise
+     */
     public boolean autoAssignAnyRecipe(MealPlan plan,
-                                       DayOfWeek startDay,
-                                       MealType type) {
+            DayOfWeek startDay,
+            MealType type) {
         if (plan == null) {
             throw new IllegalArgumentException("MealPlan cannot be null");
         }
@@ -71,8 +104,7 @@ public class MealPlannerService {
                 plan,
                 startDay,
                 type,
-                pantry
-        );
+                pantry);
 
         if (recipe == null) {
             return false;
@@ -80,7 +112,6 @@ public class MealPlannerService {
 
         return assignToPlan(plan, startDay, type, recipe);
     }
-
 
     public ShoppingList buildShoppingListForPlan(MealPlan plan) {
         if (plan == null) {
@@ -126,9 +157,9 @@ public class MealPlannerService {
     }
 
     private boolean assignToPlan(MealPlan plan,
-                                 DayOfWeek day,
-                                 MealType type,
-                                 Recipe recipe) {
+            DayOfWeek day,
+            MealType type,
+            Recipe recipe) {
         if (plan == null) {
             throw new IllegalArgumentException("MealPlan cannot be null");
         }
