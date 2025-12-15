@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 
 import it.sds.mealplanner.export.PlainTextExporter;
@@ -65,10 +66,10 @@ public class MealPlannerApp {
 
     Ingredient bread = new Ingredient("Bread", Unit.GRAM);
     bread.setNutritionPerUnit(new NutritionFacts(265, 9, 49, 3.2));
-    
+
     Ingredient cornCakes = new Ingredient("Gallette mais", Unit.GRAM);
     cornCakes.setNutritionPerUnit(new NutritionFacts(380, 8, 84, 1));
-    
+
     Ingredient wasaBread = new Ingredient("Fette integrali - Wasa", Unit.GRAM);
     wasaBread.setNutritionPerUnit(new NutritionFacts(350, 12, 70, 5));
 
@@ -322,64 +323,64 @@ public class MealPlannerApp {
 
     Ingredient mango = new Ingredient("Mango", Unit.GRAM);
     mango.setNutritionPerUnit(new NutritionFacts(60, 0.8, 15, 0.4));
+
     // --- Recipes ---
     // --- SNACKS ---
     Recipe s1 = Recipe.create("Apple snack", MealType.SNACK);
     s1.addIngredient(apple, 1);
     s1.addTags(List.of(DietaryTag.VEGAN, DietaryTag.LOW_FAT));
-    
+
     Recipe s2 = Recipe.create("Banana snack", MealType.SNACK);
     s2.addIngredient(banana, 1);
     s2.addTags(List.of(DietaryTag.VEGAN));
-    
+
     Recipe s3 = Recipe.create("Pear snack", MealType.SNACK);
     s3.addIngredient(pear, 1);
     s3.addTags(List.of(DietaryTag.VEGAN));
-    
+
     Recipe s4 = Recipe.create("Orange snack", MealType.SNACK);
     s4.addIngredient(orange, 1);
     s4.addTags(List.of(DietaryTag.VEGAN, DietaryTag.LOW_FAT));
-    
+
     Recipe s5 = Recipe.create("Kiwi snack", MealType.SNACK);
     s5.addIngredient(kiwi, 1);
     s5.addTags(List.of(DietaryTag.VEGAN));
-    
+
     Recipe s6 = Recipe.create("Grapes snack", MealType.SNACK);
     s6.addIngredient(grapes, 150);
     s6.addTags(List.of(DietaryTag.VEGAN));
-    
+
     Recipe s7 = Recipe.create("Pineapple snack", MealType.SNACK);
     s7.addIngredient(pineapple, 200);
     s7.addTags(List.of(DietaryTag.VEGAN));
-    
+
     Recipe s8 = Recipe.create("Mango snack", MealType.SNACK);
     s8.addIngredient(mango, 150);
     s8.addTags(List.of(DietaryTag.VEGAN));
-    
+
     Recipe s9 = Recipe.create("Strawberry snack", MealType.SNACK);
     s9.addIngredient(strawberry, 150);
     s9.addTags(List.of(DietaryTag.VEGAN, DietaryTag.LOW_FAT));
-    
+
     Recipe s10 = Recipe.create("Blueberry snack", MealType.SNACK);
     s10.addIngredient(blueberry, 150);
     s10.addTags(List.of(DietaryTag.VEGAN, DietaryTag.LOW_FAT));
-    
+
     Recipe s11 = Recipe.create("Greek yogurt snack", MealType.SNACK);
     s11.addIngredient(greekYogurt, 150);
     s11.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe s12 = Recipe.create("Protein yogurt snack", MealType.SNACK);
     s12.addIngredient(proteinYogurt, 160);
     s12.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe s13 = Recipe.create("Corn cakes snack", MealType.SNACK);
     s13.addIngredient(cornCakes, 30);
     s13.addTags(List.of(DietaryTag.VEGAN));
-    
+
     Recipe s14 = Recipe.create("Biscuits snack", MealType.SNACK);
     s14.addIngredient(biscuitsMarie, 30);
     s14.addTags(List.of(DietaryTag.VEGETARIAN));
-
 
     // --- BREAKFAST ---
     Recipe b1 = Recipe.create("Greek yogurt + corn flakes + low sugar jam", MealType.BREAKFAST);
@@ -387,37 +388,37 @@ public class MealPlannerApp {
     b1.addIngredient(cornFlakes, 30);
     b1.addIngredient(marmaladeLowSugar, 30);
     b1.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe b2 = Recipe.create("Yogurt Fage 0% + oats + honey", MealType.BREAKFAST);
     b2.addIngredient(yogurtFage, 170);
     b2.addIngredient(oatsFlakes, 30);
     b2.addIngredient(honey, 12);
     b2.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN, DietaryTag.LOW_FAT));
-    
+
     Recipe b3 = Recipe.create("Yogurt Hipro + muesli + honey", MealType.BREAKFAST);
     b3.addIngredient(yogurtHiproDanone, 160);
     b3.addIngredient(muesli, 30);
     b3.addIngredient(honey, 12);
     b3.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe b4 = Recipe.create("Yogurt Zymil Greek + rice flakes + low sugar jam", MealType.BREAKFAST);
     b4.addIngredient(yogurtZymilGreek, 150);
     b4.addIngredient(riceFlakes, 30);
     b4.addIngredient(marmaladeLowSugar, 30);
     b4.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe b5 = Recipe.create("Almond milk + corn flakes + honey", MealType.BREAKFAST);
     b5.addIngredient(almondMilk, 200);
     b5.addIngredient(cornFlakes, 30);
     b5.addIngredient(honey, 12);
     b5.addTags(List.of(DietaryTag.VEGAN));
-    
+
     Recipe b6 = Recipe.create("Oat milk + oats + low sugar jam", MealType.BREAKFAST);
     b6.addIngredient(oatMilk, 200);
     b6.addIngredient(oatsFlakes, 30);
     b6.addIngredient(marmaladeLowSugar, 30);
     b6.addTags(List.of(DietaryTag.VEGAN));
-    
+
     Recipe b7 = Recipe.create("Whole wheat bread + low sugar jam", MealType.BREAKFAST);
     b7.addIngredient(wholeWheatBread, 50);
     b7.addIngredient(marmaladeLowSugar, 30);
@@ -429,89 +430,88 @@ public class MealPlannerApp {
     m1.addIngredient(chickPeas, 100);
     m1.addIngredient(tomato, 150);
     m1.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe m2 = Recipe.create("Rice with chicken and zucchini", MealType.DINNER);
     m2.addIngredient(rice, 60);
     m2.addIngredient(chicken, 200);
     m2.addIngredient(zucchini, 150);
     m2.addTags(List.of(DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
-    
+
     Recipe m3 = Recipe.create("Quinoa with tofu and peppers", MealType.LUNCH);
     m3.addIngredient(quinoa, 60);
     m3.addIngredient(tofu, 150);
     m3.addIngredient(bellPepper, 150);
     m3.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
-    
+
     Recipe m4 = Recipe.create("Barley with tuna and tomato", MealType.DINNER);
     m4.addIngredient(barley, 60);
     m4.addIngredient(tuna, 150);
     m4.addIngredient(tomato, 150);
     m4.addTags(List.of(DietaryTag.PESCATARIAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe m5 = Recipe.create("Couscous with lentils and spinach", MealType.LUNCH);
     m5.addIngredient(couscous, 60);
     m5.addIngredient(lentils, 100);
     m5.addIngredient(spinach, 150);
     m5.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe m6 = Recipe.create("Potatoes with beef and lettuce", MealType.DINNER);
     m6.addIngredient(potato, 250);
     m6.addIngredient(beef, 200);
     m6.addIngredient(lettuce, 150);
     m6.addTags(List.of(DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
-    
+
     Recipe m7 = Recipe.create("Farro with tempeh and zucchini", MealType.LUNCH);
     m7.addIngredient(farroCereal, 60);
     m7.addIngredient(tempeh, 150);
     m7.addIngredient(zucchini, 150);
     m7.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe m8 = Recipe.create("Rice basmati with salmon and spinach", MealType.DINNER);
     m8.addIngredient(basmatiRice, 60);
     m8.addIngredient(salmon, 200);
     m8.addIngredient(spinach, 150);
     m8.addTags(List.of(DietaryTag.PESCATARIAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe m9 = Recipe.create("Gnocchi with ricotta and tomato", MealType.LUNCH);
     m9.addIngredient(gnocchi, 150);
     m9.addIngredient(ricotta, 100);
     m9.addIngredient(tomato, 150);
     m9.addTags(List.of(DietaryTag.VEGETARIAN));
-    
+
     Recipe m10 = Recipe.create("Egg pasta with pork and peppers", MealType.DINNER);
     m10.addIngredient(eggPasta, 60);
     m10.addIngredient(pork, 200);
     m10.addIngredient(bellPepper, 150);
     m10.addTags(List.of(DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe m11 = Recipe.create("Bread with eggs and spinach", MealType.LUNCH);
     m11.addIngredient(bread, 70);
     m11.addIngredient(eggs, 2);
     m11.addIngredient(spinach, 150);
     m11.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-    
+
     Recipe m12 = Recipe.create("Quinoa with seitan and pumpkin", MealType.DINNER);
     m12.addIngredient(quinoa, 60);
     m12.addIngredient(seitan, 150);
     m12.addIngredient(pumpkin, 200);
     m12.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN, DietaryTag.LOW_FAT));
-    
+
     Recipe m13 = Recipe.create("Couscous with mozzarella and tomato", MealType.LUNCH);
     m13.addIngredient(couscous, 60);
     m13.addIngredient(mozzarella, 150);
     m13.addIngredient(tomato, 150);
     m13.addTags(List.of(DietaryTag.VEGETARIAN));
-    
+
     Recipe m14 = Recipe.create("Potatoes with cod and zucchini", MealType.DINNER);
     m14.addIngredient(potato, 250);
     m14.addIngredient(cod, 200);
     m14.addIngredient(zucchini, 150);
     m14.addTags(List.of(DietaryTag.PESCATARIAN, DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
 
-
     // --- Recipe Repository ---
     RecipeRepository recipeRepo = new InMemoryRecipeRepository();
-    
+
     // Breakfast (7)
     recipeRepo.save(b1);
     recipeRepo.save(b2);
@@ -520,7 +520,7 @@ public class MealPlannerApp {
     recipeRepo.save(b5);
     recipeRepo.save(b6);
     recipeRepo.save(b7);
-    
+
     // Snacks (14)
     recipeRepo.save(s1);
     recipeRepo.save(s2);
@@ -536,7 +536,7 @@ public class MealPlannerApp {
     recipeRepo.save(s12);
     recipeRepo.save(s13);
     recipeRepo.save(s14);
-    
+
     // Main meals (14)
     recipeRepo.save(m1);
     recipeRepo.save(m2);
@@ -558,7 +558,7 @@ public class MealPlannerApp {
 
     // --- Meal plan for the whole week ---
     MealPlan plan = new MealPlan(LocalDate.now(), 2000.0);
-    for (DayOfWeek day: DayOfWeek.values()) {
+    for (DayOfWeek day : DayOfWeek.values()) {
       plan.addDayPlan(new DayPlan(day));
     }
 
@@ -568,7 +568,9 @@ public class MealPlannerApp {
     prefs.addPreferredTag(DietaryTag.VEGETARIAN);
     prefs.addPreferredTag(DietaryTag.HIGH_PROTEIN);
 
-    prefs.addExcludedIngredient(orata);
+    prefs.addExcludedIngredient(pork);
+    prefs.addExcludedIngredient(beef);
+    prefs.addExcludedIngredient(chicken);
     prefs.setMaxSameRecipePerWeek(2);
     prefs.setAvoidSameRecipeOnConsecutiveDays(true);
 
@@ -577,14 +579,14 @@ public class MealPlannerApp {
     MealPlannerService service = new MealPlannerService(pantry, recipeRepo, strategy);
     // MealPlannerService service = new MealPlannerService(pantry, recipeRepo);
 
-    for (DayOfWeek day: DayOfWeek.values()) {
-      for (MealType type: MealType.values()) {
+    for (DayOfWeek day : DayOfWeek.values()) {
+      for (MealType type : MealType.values()) {
         service.autoAssignDayWithTwoSnacks(plan, day);
       }
     }
 
     System.out.println("===== MEAL PLAN =====");
-    for (DayOfWeek day: DayOfWeek.values()) {
+    for (DayOfWeek day : DayOfWeek.values()) {
       DayPlan dayPlan = plan.getDayPlan(day);
       System.out.println("\n" + day + ":");
       if (dayPlan == null) {
@@ -592,7 +594,7 @@ public class MealPlannerApp {
         continue;
       }
 
-      for (MealSlot slot: dayPlan.getMeals()) {
+      for (MealSlot slot : dayPlan.getMeals()) {
         MealType type = slot.getType();
         Recipe recipe = slot.getRecipe();
         String recipeName = (recipe != null) ? recipe.getName() : "(vuoto)";
@@ -604,12 +606,12 @@ public class MealPlannerApp {
     ShoppingList globalShoppingList = service.buildShoppingListForPlan(plan);
 
     System.out.println("\n===== SHOPPING LIST GLOBALE =====");
-    Map < Ingredient, Double > items = globalShoppingList.getItems();
+    Map<Ingredient, Double> items = globalShoppingList.getItems();
 
     if (items.isEmpty()) {
       System.out.println("Nessun ingrediente da comprare: la pantry copre tutto il piano!");
     } else {
-      for (Map.Entry < Ingredient, Double > entry: items.entrySet()) {
+      for (Map.Entry<Ingredient, Double> entry : items.entrySet()) {
         Ingredient ing = entry.getKey();
         double qty = entry.getValue();
         System.out.println("- " + ing.getName() + ": " + qty + " " + ing.getUnit());
@@ -627,11 +629,5 @@ public class MealPlannerApp {
     } catch (IOException e) {
       System.err.println("Errore durante l'esportazione del piano: " + e.getMessage());
     }
-
-    // System.out.println("DEBUG NUTRITION:");
-    // System.out.println(" " + pastaCeci.getName() + " -> " +
-    // pastaCeci.computeNutritionFacts().getCalories() + " kcal");
-    // System.out.println(" " + bananaY.getName() + " -> " +
-    // bananaY.computeNutritionFacts().getCalories() + " kcal");
   }
 }
