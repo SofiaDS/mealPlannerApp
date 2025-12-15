@@ -29,8 +29,7 @@ public class MealPlannerApp {
 
     public static void main(String[] args) {
 
-        // --- Ingredients ---
-        // cereals
+        // Cereals
         Ingredient pasta = new Ingredient("Pasta", Unit.GRAM);
         pasta.setNutritionPerUnit(new NutritionFacts(350, 12, 70, 2));
         Ingredient rice = new Ingredient("Rice", Unit.GRAM);
@@ -48,24 +47,8 @@ public class MealPlannerApp {
         Ingredient barley = new Ingredient("Barley", Unit.GRAM);
         barley.setNutritionPerUnit(new NutritionFacts(354, 12.5, 73.5, 2.3));
 
-        // animal proteins
-        Ingredient orata = new Ingredient("Orata", Unit.GRAM);
-        orata.setNutritionPerUnit(new NutritionFacts(121, 20.7, 1, 3.8));
-        Ingredient chicken = new Ingredient("Chicken", Unit.GRAM);
-        chicken.setNutritionPerUnit(new NutritionFacts(165, 30, 0, 3.5));
-        Ingredient salmon = new Ingredient("Salmon", Unit.GRAM);
-        salmon.setNutritionPerUnit(new NutritionFacts(208, 20, 0, 13));
-        Ingredient tuna = new Ingredient("Tuna", Unit.GRAM);
-        tuna.setNutritionPerUnit(new NutritionFacts(132, 28, 0, 1.3));
-        Ingredient beef = new Ingredient("Beef", Unit.GRAM);
-        beef.setNutritionPerUnit(new NutritionFacts(250, 26, 0, 15));
-        Ingredient pork = new Ingredient("Pork", Unit.GRAM);
-        pork.setNutritionPerUnit(new NutritionFacts(242, 27, 0, 14));
-        Ingredient egg = new Ingredient("Eggs", Unit.PIECE);
-        egg.setNutritionPerUnit(new NutritionFacts(65, 6.3, 0.34, 4.9));
-
-        // plant proteins
-        Ingredient chickPeas = new Ingredient("Ceci", Unit.GRAM);
+        // --- Legumes ---
+        Ingredient chickPeas = new Ingredient("Chickpeas", Unit.GRAM);
         chickPeas.setNutritionPerUnit(new NutritionFacts(364, 21.9, 63, 6));
         Ingredient redBeans = new Ingredient("Red beans", Unit.GRAM);
         redBeans.setNutritionPerUnit(new NutritionFacts(337, 24.4, 60, 0.8));
@@ -78,70 +61,58 @@ public class MealPlannerApp {
         Ingredient seitan = new Ingredient("Seitan", Unit.GRAM);
         seitan.setNutritionPerUnit(new NutritionFacts(121, 21, 4, 2));
 
-        // vegetables
-        Ingredient lettuce = new Ingredient("Lettuce", Unit.GRAM);
-        lettuce.setNutritionPerUnit(new NutritionFacts(21, 1.8, 2.97, 0.4));
-        Ingredient mushrooms = new Ingredient("Mushrooms", Unit.GRAM);
-        mushrooms.setNutritionPerUnit(new NutritionFacts(25, 4, 4, 1));
-        Ingredient pumpkin = new Ingredient("Pumpkin", Unit.GRAM);
-        pumpkin.setNutritionPerUnit(new NutritionFacts(26, 1, 3.5, 0.1));
-        Ingredient spinach = new Ingredient("Spinach", Unit.GRAM);
-        spinach.setNutritionPerUnit(new NutritionFacts(23, 2.8, 3.6, 0.4));
-        Ingredient rucola = new Ingredient("Rucola", Unit.GRAM);
-        rucola.setNutritionPerUnit(new NutritionFacts(26, 2.9, 3.6, 0.7));
-        Ingredient tomato = new Ingredient("Tomato", Unit.GRAM);
-        tomato.setNutritionPerUnit(new NutritionFacts(18, 0.9, 3.9, 0.2));
-        Ingredient carrot = new Ingredient("Carrot", Unit.GRAM);
-        carrot.setNutritionPerUnit(new NutritionFacts(41, 0.9, 10, 0.2));
-        Ingredient cucumber = new Ingredient("Cucumber", Unit.GRAM);
-        cucumber.setNutritionPerUnit(new NutritionFacts(16, 0.7, 3.6, 0.1));
-        Ingredient bellPepper = new Ingredient("Bell pepper", Unit.GRAM);
-        bellPepper.setNutritionPerUnit(new NutritionFacts(31, 1, 6, 0.3));
-        Ingredient onion = new Ingredient("Onion", Unit.GRAM);
-        onion.setNutritionPerUnit(new NutritionFacts(40, 1.1, 9.3, 0.1));
-        Ingredient celery = new Ingredient("Celery", Unit.GRAM);
-        celery.setNutritionPerUnit(new NutritionFacts(16, 0.7, 3, 0.2));
-        Ingredient zucchini = new Ingredient("Zucchini", Unit.GRAM);
-        zucchini.setNutritionPerUnit(new NutritionFacts(17, 1.2, 3.1, 0.3));
+        // --- Meat ---
+        Ingredient chicken = new Ingredient("Chicken", Unit.GRAM);
+        chicken.setNutritionPerUnit(new NutritionFacts(165, 30, 0, 3.5));
+        Ingredient beef = new Ingredient("Beef", Unit.GRAM);
+        beef.setNutritionPerUnit(new NutritionFacts(250, 26, 0, 15));
+        Ingredient pork = new Ingredient("Pork", Unit.GRAM);
+        pork.setNutritionPerUnit(new NutritionFacts(242, 27, 0, 14));
+        Ingredient turkey = new Ingredient("Turkey", Unit.GRAM);
+        turkey.setNutritionPerUnit(new NutritionFacts(135, 29, 0, 1.5));
+        Ingredient rabbit = new Ingredient("Rabbit", Unit.GRAM);
+        rabbit.setNutritionPerUnit(new NutritionFacts(173, 28, 0, 7.6));
 
-        // fruits
-        Ingredient apple = new Ingredient("Mela", Unit.PIECE);
-        apple.setNutritionPerUnit(new NutritionFacts(64, 0.6, 17, 0.15));
-        Ingredient banana = new Ingredient("Banana", Unit.PIECE);
-        banana.setNutritionPerUnit(new NutritionFacts(110, 1, 28, 9));
-        Ingredient orange = new Ingredient("Orange", Unit.PIECE);
-        orange.setNutritionPerUnit(new NutritionFacts(70, 1.3, 16.5, 0.2));
-        Ingredient pear = new Ingredient("Pear", Unit.PIECE);
-        pear.setNutritionPerUnit(new NutritionFacts(96, 0.6, 26.7, 0.2));
-        Ingredient strawberry = new Ingredient("Strawberry", Unit.GRAM);
-        strawberry.setNutritionPerUnit(new NutritionFacts(32, 0.7, 7.7, 0.3));
-        Ingredient blueberry = new Ingredient("Blueberry", Unit.GRAM);
-        blueberry.setNutritionPerUnit(new NutritionFacts(57, 0.7, 14, 0.3));
-        Ingredient raspberry = new Ingredient("Raspberry", Unit.GRAM);
-        raspberry.setNutritionPerUnit(new NutritionFacts(52, 1.2, 12, 0.7));
-        Ingredient kiwi = new Ingredient("Kiwi", Unit.PIECE);
-        kiwi.setNutritionPerUnit(new NutritionFacts(42, 0.8, 10, 0.4));
-        Ingredient pineapple = new Ingredient("Pineapple", Unit.GRAM);
-        pineapple.setNutritionPerUnit(new NutritionFacts(50, 0.5, 13, 0.1));
-        Ingredient mango = new Ingredient("Mango", Unit.GRAM);
-        mango.setNutritionPerUnit(new NutritionFacts(60, 0.8, 15, 0.4));
-        Ingredient grapes = new Ingredient("Grapes", Unit.GRAM);
-        grapes.setNutritionPerUnit(new NutritionFacts(69, 0.7, 18, 0.2));
+        // --- Fish ---
+        Ingredient salmon = new Ingredient("Salmon", Unit.GRAM);
+        salmon.setNutritionPerUnit(new NutritionFacts(208, 20, 0, 13));
+        Ingredient tuna = new Ingredient("Tuna", Unit.GRAM);
+        tuna.setNutritionPerUnit(new NutritionFacts(132, 28, 0, 1.3));
+        Ingredient cod = new Ingredient("Cod", Unit.GRAM);
+        cod.setNutritionPerUnit(new NutritionFacts(105, 23, 0, 0.9));
+        Ingredient hake = new Ingredient("Hake", Unit.GRAM);
+        hake.setNutritionPerUnit(new NutritionFacts(112, 20, 0, 3.4));
+        Ingredient seabass = new Ingredient("Seabass", Unit.GRAM);
+        seabass.setNutritionPerUnit(new NutritionFacts(97, 20.2, 0, 2.7));
+        Ingredient sardine = new Ingredient("Sardine", Unit.GRAM);
+        sardine.setNutritionPerUnit(new NutritionFacts(208, 24, 0, 11));
 
-        // dairy
-        Ingredient greekYNoFat = new Ingredient("Greek yogurt", Unit.GRAM);
-        greekYNoFat.setNutritionPerUnit(new NutritionFacts(63, 10, 4, 0.5));
-        Ingredient fullFatMilk = new Ingredient("Full-fat milk", Unit.GRAM);
-        fullFatMilk.setNutritionPerUnit(new NutritionFacts(61, 3.2, 5, 3.3));
-        Ingredient oatMilk = new Ingredient("Oat milk", Unit.GRAM);
-        oatMilk.setNutritionPerUnit(new NutritionFacts(47, 1, 6, 1.5));
+        // --- Cheese ---
+        Ingredient ricotta = new Ingredient("Ricotta", Unit.GRAM);
+        ricotta.setNutritionPerUnit(new NutritionFacts(174, 11.8, 6.5, 13.2));
         Ingredient mozzarella = new Ingredient("Mozzarella", Unit.GRAM);
         mozzarella.setNutritionPerUnit(new NutritionFacts(280, 28, 3, 17));
-        Ingredient cheddarCheese = new Ingredient("Cheddar cheese", Unit.GRAM);
-        cheddarCheese.setNutritionPerUnit(new NutritionFacts(403, 25, 1.3, 33));
-        Ingredient fetaCheese = new Ingredient("Feta cheese", Unit.GRAM);
-        fetaCheese.setNutritionPerUnit(new NutritionFacts(264, 14, 4, 21));
+        Ingredient feta = new Ingredient("Feta", Unit.GRAM);
+        feta.setNutritionPerUnit(new NutritionFacts(264, 14, 4, 21));
+        Ingredient parmesan = new Ingredient("Parmesan", Unit.GRAM);
+        parmesan.setNutritionPerUnit(new NutritionFacts(431, 38, 4.1, 29));
+        Ingredient grana = new Ingredient("Grana", Unit.GRAM);
+        grana.setNutritionPerUnit(new NutritionFacts(431, 37.7, 4.5, 28));
+        Ingredient primosale = new Ingredient("Primosale", Unit.GRAM);
+        primosale.setNutritionPerUnit(new NutritionFacts(300, 20, 0, 20));
 
+        // --- Eggs ---
+        Ingredient eggs = new Ingredient("Eggs", Unit.PIECE);
+        eggs.setNutritionPerUnit(new NutritionFacts(65, 6.3, 0.34, 4.9));
+
+        // --- Dairy ---
+        Ingredient fullFatMilk = new Ingredient("Full-fat milk", Unit.GRAM);
+        fullFatMilk.setNutritionPerUnit(new NutritionFacts(61, 3.2, 5, 3.3));
+        Ingredient greekYogurt = new Ingredient("Greek yogurt", Unit.GRAM);
+        greekYogurt.setNutritionPerUnit(new NutritionFacts(63, 10, 4, 0.5));
+        Ingredient oatMilk = new Ingredient("Oat milk", Unit.GRAM);
+        oatMilk.setNutritionPerUnit(new NutritionFacts(47, 1, 6, 1.5));
+        
         // --- Recipes ---
         // --- snacks ---
         Recipe appleSnack = Recipe.create("Apple snack", MealType.SNACK);
