@@ -323,225 +323,238 @@ public class MealPlannerApp {
     Ingredient mango = new Ingredient("Mango", Unit.GRAM);
     mango.setNutritionPerUnit(new NutritionFacts(60, 0.8, 15, 0.4));
     // --- Recipes ---
-    // --- snacks ---
-    Recipe appleSnack = Recipe.create("Apple snack", MealType.SNACK);
-    appleSnack.addIngredient(apple, 1);
-    appleSnack.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.LOW_FAT));
+    // --- SNACKS ---
+    Recipe s1 = Recipe.create("Apple snack", MealType.SNACK);
+    s1.addIngredient(apple, 1);
+    s1.addTags(List.of(DietaryTag.VEGAN, DietaryTag.LOW_FAT));
+    
+    Recipe s2 = Recipe.create("Banana snack", MealType.SNACK);
+    s2.addIngredient(banana, 1);
+    s2.addTags(List.of(DietaryTag.VEGAN));
+    
+    Recipe s3 = Recipe.create("Pear snack", MealType.SNACK);
+    s3.addIngredient(pear, 1);
+    s3.addTags(List.of(DietaryTag.VEGAN));
+    
+    Recipe s4 = Recipe.create("Orange snack", MealType.SNACK);
+    s4.addIngredient(orange, 1);
+    s4.addTags(List.of(DietaryTag.VEGAN, DietaryTag.LOW_FAT));
+    
+    Recipe s5 = Recipe.create("Kiwi snack", MealType.SNACK);
+    s5.addIngredient(kiwi, 1);
+    s5.addTags(List.of(DietaryTag.VEGAN));
+    
+    Recipe s6 = Recipe.create("Grapes snack", MealType.SNACK);
+    s6.addIngredient(grapes, 150);
+    s6.addTags(List.of(DietaryTag.VEGAN));
+    
+    Recipe s7 = Recipe.create("Pineapple snack", MealType.SNACK);
+    s7.addIngredient(pineapple, 200);
+    s7.addTags(List.of(DietaryTag.VEGAN));
+    
+    Recipe s8 = Recipe.create("Mango snack", MealType.SNACK);
+    s8.addIngredient(mango, 150);
+    s8.addTags(List.of(DietaryTag.VEGAN));
+    
+    Recipe s9 = Recipe.create("Strawberry snack", MealType.SNACK);
+    s9.addIngredient(strawberry, 150);
+    s9.addTags(List.of(DietaryTag.VEGAN, DietaryTag.LOW_FAT));
+    
+    Recipe s10 = Recipe.create("Blueberry snack", MealType.SNACK);
+    s10.addIngredient(blueberry, 150);
+    s10.addTags(List.of(DietaryTag.VEGAN, DietaryTag.LOW_FAT));
+    
+    Recipe s11 = Recipe.create("Greek yogurt snack", MealType.SNACK);
+    s11.addIngredient(greekYogurt, 150);
+    s11.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe s12 = Recipe.create("Protein yogurt snack", MealType.SNACK);
+    s12.addIngredient(proteinYogurt, 160);
+    s12.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe s13 = Recipe.create("Corn cakes snack", MealType.SNACK);
+    s13.addIngredient(cornCakes, 30);
+    s13.addTags(List.of(DietaryTag.VEGAN));
+    
+    Recipe s14 = Recipe.create("Biscuits snack", MealType.SNACK);
+    s14.addIngredient(biscuitsMarie, 30);
+    s14.addTags(List.of(DietaryTag.VEGETARIAN));
 
-    Recipe orangeSnack = Recipe.create("Orange snack", MealType.SNACK);
-    orangeSnack.addIngredient(orange, 1);
-    orangeSnack.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.LOW_FAT));
 
-    Recipe pearSnack = Recipe.create("Pear snack", MealType.SNACK);
-    pearSnack.addIngredient(pear, 1);
-    pearSnack.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.LOW_FAT));
+    // --- BREAKFAST ---
+    Recipe b1 = Recipe.create("Greek yogurt + corn flakes + low sugar jam", MealType.BREAKFAST);
+    b1.addIngredient(greekYogurt, 150);
+    b1.addIngredient(cornFlakes, 30);
+    b1.addIngredient(marmaladeLowSugar, 30);
+    b1.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe b2 = Recipe.create("Yogurt Fage 0% + oats + honey", MealType.BREAKFAST);
+    b2.addIngredient(yogurtFage, 170);
+    b2.addIngredient(oatsFlakes, 30);
+    b2.addIngredient(honey, 12);
+    b2.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN, DietaryTag.LOW_FAT));
+    
+    Recipe b3 = Recipe.create("Yogurt Hipro + muesli + honey", MealType.BREAKFAST);
+    b3.addIngredient(yogurtHiproDanone, 160);
+    b3.addIngredient(muesli, 30);
+    b3.addIngredient(honey, 12);
+    b3.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe b4 = Recipe.create("Yogurt Zymil Greek + rice flakes + low sugar jam", MealType.BREAKFAST);
+    b4.addIngredient(yogurtZymilGreek, 150);
+    b4.addIngredient(riceFlakes, 30);
+    b4.addIngredient(marmaladeLowSugar, 30);
+    b4.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe b5 = Recipe.create("Almond milk + corn flakes + honey", MealType.BREAKFAST);
+    b5.addIngredient(almondMilk, 200);
+    b5.addIngredient(cornFlakes, 30);
+    b5.addIngredient(honey, 12);
+    b5.addTags(List.of(DietaryTag.VEGAN));
+    
+    Recipe b6 = Recipe.create("Oat milk + oats + low sugar jam", MealType.BREAKFAST);
+    b6.addIngredient(oatMilk, 200);
+    b6.addIngredient(oatsFlakes, 30);
+    b6.addIngredient(marmaladeLowSugar, 30);
+    b6.addTags(List.of(DietaryTag.VEGAN));
+    
+    Recipe b7 = Recipe.create("Whole wheat bread + low sugar jam", MealType.BREAKFAST);
+    b7.addIngredient(wholeWheatBread, 50);
+    b7.addIngredient(marmaladeLowSugar, 30);
+    b7.addTags(List.of(DietaryTag.VEGAN));
 
-    Recipe bananaSnack = Recipe.create("Banana snack", MealType.SNACK);
-    bananaSnack.addIngredient(banana, 1);
-    bananaSnack.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.LOW_FAT));
+    // --- MAIN MEALS ---
+    Recipe m1 = Recipe.create("Pasta with chickpeas and tomato", MealType.LUNCH);
+    m1.addIngredient(pasta, 80);
+    m1.addIngredient(chickPeas, 100);
+    m1.addIngredient(tomato, 150);
+    m1.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe m2 = Recipe.create("Rice with chicken and zucchini", MealType.DINNER);
+    m2.addIngredient(rice, 60);
+    m2.addIngredient(chicken, 200);
+    m2.addIngredient(zucchini, 150);
+    m2.addTags(List.of(DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
+    
+    Recipe m3 = Recipe.create("Quinoa with tofu and peppers", MealType.LUNCH);
+    m3.addIngredient(quinoa, 60);
+    m3.addIngredient(tofu, 150);
+    m3.addIngredient(bellPepper, 150);
+    m3.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
+    
+    Recipe m4 = Recipe.create("Barley with tuna and tomato", MealType.DINNER);
+    m4.addIngredient(barley, 60);
+    m4.addIngredient(tuna, 150);
+    m4.addIngredient(tomato, 150);
+    m4.addTags(List.of(DietaryTag.PESCATARIAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe m5 = Recipe.create("Couscous with lentils and spinach", MealType.LUNCH);
+    m5.addIngredient(couscous, 60);
+    m5.addIngredient(lentils, 100);
+    m5.addIngredient(spinach, 150);
+    m5.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe m6 = Recipe.create("Potatoes with beef and lettuce", MealType.DINNER);
+    m6.addIngredient(potato, 250);
+    m6.addIngredient(beef, 200);
+    m6.addIngredient(lettuce, 150);
+    m6.addTags(List.of(DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
+    
+    Recipe m7 = Recipe.create("Farro with tempeh and zucchini", MealType.LUNCH);
+    m7.addIngredient(farroCereal, 60);
+    m7.addIngredient(tempeh, 150);
+    m7.addIngredient(zucchini, 150);
+    m7.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe m8 = Recipe.create("Rice basmati with salmon and spinach", MealType.DINNER);
+    m8.addIngredient(basmatiRice, 60);
+    m8.addIngredient(salmon, 200);
+    m8.addIngredient(spinach, 150);
+    m8.addTags(List.of(DietaryTag.PESCATARIAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe m9 = Recipe.create("Gnocchi with ricotta and tomato", MealType.LUNCH);
+    m9.addIngredient(gnocchi, 150);
+    m9.addIngredient(ricotta, 100);
+    m9.addIngredient(tomato, 150);
+    m9.addTags(List.of(DietaryTag.VEGETARIAN));
+    
+    Recipe m10 = Recipe.create("Egg pasta with pork and peppers", MealType.DINNER);
+    m10.addIngredient(eggPasta, 60);
+    m10.addIngredient(pork, 200);
+    m10.addIngredient(bellPepper, 150);
+    m10.addTags(List.of(DietaryTag.HIGH_PROTEIN));
+    
+    Recipe m11 = Recipe.create("Bread with eggs and spinach", MealType.LUNCH);
+    m11.addIngredient(bread, 70);
+    m11.addIngredient(eggs, 2);
+    m11.addIngredient(spinach, 150);
+    m11.addTags(List.of(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
+    
+    Recipe m12 = Recipe.create("Quinoa with seitan and pumpkin", MealType.DINNER);
+    m12.addIngredient(quinoa, 60);
+    m12.addIngredient(seitan, 150);
+    m12.addIngredient(pumpkin, 200);
+    m12.addTags(List.of(DietaryTag.VEGAN, DietaryTag.HIGH_PROTEIN, DietaryTag.LOW_FAT));
+    
+    Recipe m13 = Recipe.create("Couscous with mozzarella and tomato", MealType.LUNCH);
+    m13.addIngredient(couscous, 60);
+    m13.addIngredient(mozzarella, 150);
+    m13.addIngredient(tomato, 150);
+    m13.addTags(List.of(DietaryTag.VEGETARIAN));
+    
+    Recipe m14 = Recipe.create("Potatoes with cod and zucchini", MealType.DINNER);
+    m14.addIngredient(potato, 250);
+    m14.addIngredient(cod, 200);
+    m14.addIngredient(zucchini, 150);
+    m14.addTags(List.of(DietaryTag.PESCATARIAN, DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
 
-    Recipe fruitMixSnack1 = Recipe.create("Fruit mix snack apple, banana, orange", MealType.SNACK);
-    fruitMixSnack1.addIngredient(apple, 1);
-    fruitMixSnack1.addIngredient(banana, 1);
-    fruitMixSnack1.addIngredient(orange, 1);
-    fruitMixSnack1.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.LOW_FAT));
-
-    Recipe fruitMixSnack2 = Recipe.create("Fruit mix snack 2: pear, kiwi", MealType.SNACK);
-    fruitMixSnack2.addIngredient(pear, 1);
-    fruitMixSnack2.addIngredient(kiwi, 1);
-    fruitMixSnack2.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.LOW_FAT));
-
-    Recipe fruitMixSnack3 = Recipe.create("Fruit mix snack 3: mango, pineapple, strawberry", MealType.SNACK);
-    fruitMixSnack3.addIngredient(mango, 1);
-    fruitMixSnack3.addIngredient(pineapple, 100);
-    fruitMixSnack3.addIngredient(strawberry, 100);
-    fruitMixSnack3.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.LOW_FAT));
-
-    // breakfast
-    Recipe bananaY = Recipe.create("Greek yoghurt with banana", MealType.BREAKFAST);
-    bananaY.addIngredient(greekYNoFat, 150);
-    bananaY.addIngredient(banana, 1);
-    bananaY.addTags(java.util.Arrays.asList(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN, DietaryTag.LOW_FAT)); // yogurt
-    // no-fat
-
-    Recipe appleY = Recipe.create("Fruit salad", MealType.BREAKFAST);
-    appleY.addIngredient(apple, 2);
-    appleY.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.LOW_FAT));
-
-    Recipe oatMilkCereal = Recipe.create("Oat milk with corn flakes", MealType.BREAKFAST);
-    oatMilkCereal.addIngredient(oatMilk, 200);
-    oatMilkCereal.addIngredient(cornFlakes, 50);
-    oatMilkCereal.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN));
-
-    Recipe yogurtFruitMix = Recipe.create("Greek yoghurt with mixed red fruits", MealType.BREAKFAST);
-    yogurtFruitMix.addIngredient(greekYNoFat, 150);
-    yogurtFruitMix.addIngredient(strawberry, 50);
-    yogurtFruitMix.addIngredient(blueberry, 50);
-    yogurtFruitMix.addIngredient(raspberry, 50);
-    yogurtFruitMix
-      .addTags(java.util.Arrays.asList(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN, DietaryTag.LOW_FAT));
-
-    Recipe bananaOats = Recipe.create("Banana with oats", MealType.BREAKFAST);
-    bananaOats.addIngredient(banana, 1);
-    bananaOats.addIngredient(oats, 50);
-    bananaOats.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN));
-
-    Recipe appleYogurt = Recipe.create("Greek yoghurt with apple", MealType.BREAKFAST);
-    appleYogurt.addIngredient(greekYNoFat, 150);
-    appleYogurt.addIngredient(apple, 1);
-    appleYogurt
-      .addTags(java.util.Arrays.asList(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN, DietaryTag.LOW_FAT));
-
-    // main
-    Recipe pastaCeci = Recipe.create("Pasta e ceci", MealType.LUNCH);
-    pastaCeci.addIngredient(pasta, 80);
-    pastaCeci.addIngredient(chickPeas, 100);
-    pastaCeci.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-
-    Recipe grilledFish = Recipe.create("Grilled orata with rice", MealType.LUNCH);
-    grilledFish.addIngredient(orata, 200);
-    grilledFish.addIngredient(rice, 150);
-    grilledFish.addTags(
-      java.util.Arrays.asList(DietaryTag.PESCATARIAN, DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
-
-    Recipe chickenMushroom = Recipe.create("Chicken with mushrooms", MealType.DINNER);
-    chickenMushroom.addIngredient(chicken, 250);
-    chickenMushroom.addIngredient(mushrooms, 100);
-    chickenMushroom.addTags(java.util.Arrays.asList(DietaryTag.HIGH_PROTEIN, DietaryTag.GLUTEN_FREE));
-
-    Recipe cousVeg = Recipe.create("Cous cous with red beans, pumpkin & spinach", MealType.LUNCH);
-    cousVeg.addIngredient(couscous, 60);
-    cousVeg.addIngredient(redBeans, 80);
-    cousVeg.addIngredient(pumpkin, 100);
-    cousVeg.addIngredient(spinach, 100);
-    cousVeg.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-
-    Recipe coldSalad = Recipe.create("Salad with rucola, lettuce and eggs", MealType.DINNER);
-    coldSalad.addIngredient(rucola, 150);
-    coldSalad.addIngredient(lettuce, 150);
-    coldSalad.addIngredient(egg, 2);
-    coldSalad.addTags(java.util.Arrays.asList(DietaryTag.VEGETARIAN, DietaryTag.LOW_CARB, DietaryTag.HIGH_PROTEIN));
-
-    Recipe chickpeaSalad = Recipe.create("Chickpeas salad with lettuce and rucola", MealType.LUNCH);
-    chickpeaSalad.addIngredient(chickPeas, 120);
-    chickpeaSalad.addIngredient(lettuce, 100);
-    chickpeaSalad.addIngredient(rucola, 50);
-    chickpeaSalad.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN,
-      DietaryTag.LOW_FAT));
-
-    Recipe eggsSpinach = Recipe.create("Eggs with spinach", MealType.DINNER);
-    eggsSpinach.addIngredient(egg, 2);
-    eggsSpinach.addIngredient(spinach, 100);
-    eggsSpinach
-      .addTags(java.util.Arrays.asList(DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN, DietaryTag.LOW_CARB));
-
-    Recipe pastaTomato = Recipe.create("Pasta with tomato sauce", MealType.LUNCH);
-    pastaTomato.addIngredient(pasta, 80);
-    pastaTomato.addIngredient(tomato, 150);
-    pastaTomato.addTags(java.util.Arrays.asList(DietaryTag.LOW_FAT, DietaryTag.VEGAN, DietaryTag.VEGETARIAN));
-
-    Recipe tofuVeggies = Recipe.create("Tofu with peppers & zucchuni", MealType.DINNER);
-    tofuVeggies.addIngredient(tofu, 150);
-    tofuVeggies.addIngredient(bellPepper, 100);
-    tofuVeggies.addIngredient(zucchini, 100);
-    tofuVeggies.addTags(java.util.Arrays.asList(DietaryTag.HIGH_PROTEIN, DietaryTag.LOW_FAT, DietaryTag.VEGAN,
-      DietaryTag.VEGETARIAN));
-
-    Recipe lentilSoup = Recipe.create("Lentil soup with carrots & celery", MealType.LUNCH);
-    lentilSoup.addIngredient(lentils, 100);
-    lentilSoup.addIngredient(carrot, 100);
-    lentilSoup.addIngredient(celery, 100);
-    lentilSoup.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN,
-      DietaryTag.GLUTEN_FREE));
-
-    Recipe beefPotato = Recipe.create("Beef with roasted potatoes", MealType.DINNER);
-    beefPotato.addIngredient(beef, 200);
-    beefPotato.addIngredient(potato, 150);
-    beefPotato.addTag(DietaryTag.HIGH_PROTEIN);
-
-    Recipe porkBarley = Recipe.create("Pork with barley salad", MealType.LUNCH);
-    porkBarley.addIngredient(pork, 200);
-    porkBarley.addIngredient(barley, 100);
-
-    Recipe salmonRice = Recipe.create("Salmon with rice and spinach", MealType.DINNER);
-    salmonRice.addIngredient(salmon, 200);
-    salmonRice.addIngredient(rice, 150);
-    salmonRice.addIngredient(spinach, 100);
-    salmonRice.addTags(java.util.Arrays.asList(DietaryTag.PESCATARIAN, DietaryTag.HIGH_PROTEIN));
-
-    Recipe tunaSalad = Recipe.create("Tuna salad with lettuce and tomato", MealType.LUNCH);
-    tunaSalad.addIngredient(tuna, 150);
-    tunaSalad.addIngredient(lettuce, 100);
-    tunaSalad.addIngredient(tomato, 100);
-    tunaSalad
-      .addTags(java.util.Arrays.asList(DietaryTag.LOW_CARB, DietaryTag.HIGH_PROTEIN, DietaryTag.PESCATARIAN));
-
-    Recipe tempehVeggies = Recipe.create("Tempeh with pepper & zucchini", MealType.DINNER);
-    tempehVeggies.addIngredient(tempeh, 150);
-    tempehVeggies.addIngredient(bellPepper, 100);
-    tempehVeggies.addIngredient(zucchini, 100);
-    tempehVeggies
-      .addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-
-    Recipe seitanMushroom = Recipe.create("Seitan with mushrooms", MealType.DINNER);
-    seitanMushroom.addIngredient(seitan, 150);
-    seitanMushroom.addIngredient(mushrooms, 100);
-    seitanMushroom
-      .addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.VEGETARIAN, DietaryTag.HIGH_PROTEIN));
-
-    Recipe tofuSalad = Recipe.create("Tofu salad with lettuce and rucola", MealType.LUNCH);
-    tofuSalad.addIngredient(tofu, 150);
-    tofuSalad.addIngredient(lettuce, 100);
-    tofuSalad.addIngredient(rucola, 50);
-    tofuSalad.addTags(java.util.Arrays.asList(DietaryTag.VEGAN, DietaryTag.LOW_CARB, DietaryTag.VEGETARIAN,
-      DietaryTag.LOW_FAT));
 
     // --- Recipe Repository ---
     RecipeRepository recipeRepo = new InMemoryRecipeRepository();
-    recipeRepo.save(eggsSpinach);
-    recipeRepo.save((appleYogurt));
-    recipeRepo.save(chickpeaSalad);
-    recipeRepo.save(pastaCeci);
-    recipeRepo.save(appleSnack);
-    recipeRepo.save(appleY);
-    recipeRepo.save(grilledFish);
-    recipeRepo.save(chickenMushroom);
-    recipeRepo.save(coldSalad);
-    recipeRepo.save(cousVeg);
-    recipeRepo.save(bananaSnack);
-    recipeRepo.save(orangeSnack);
-    recipeRepo.save(pearSnack);
-    recipeRepo.save(bananaY);
-    recipeRepo.save(oatMilkCereal);
-    recipeRepo.save(yogurtFruitMix);
-    recipeRepo.save(fruitMixSnack1);
-    recipeRepo.save(fruitMixSnack2);
-    recipeRepo.save(fruitMixSnack3);
-    recipeRepo.save(pastaTomato);
-    recipeRepo.save(tofuVeggies);
-    recipeRepo.save(lentilSoup);
-    recipeRepo.save(beefPotato);
-    recipeRepo.save(porkBarley);
-    recipeRepo.save(salmonRice);
-    recipeRepo.save(tunaSalad);
-    recipeRepo.save(tempehVeggies);
-    recipeRepo.save(seitanMushroom);
-    recipeRepo.save(tofuSalad);
+    
+    // Breakfast (7)
+    recipeRepo.save(b1);
+    recipeRepo.save(b2);
+    recipeRepo.save(b3);
+    recipeRepo.save(b4);
+    recipeRepo.save(b5);
+    recipeRepo.save(b6);
+    recipeRepo.save(b7);
+    
+    // Snacks (14)
+    recipeRepo.save(s1);
+    recipeRepo.save(s2);
+    recipeRepo.save(s3);
+    recipeRepo.save(s4);
+    recipeRepo.save(s5);
+    recipeRepo.save(s6);
+    recipeRepo.save(s7);
+    recipeRepo.save(s8);
+    recipeRepo.save(s9);
+    recipeRepo.save(s10);
+    recipeRepo.save(s11);
+    recipeRepo.save(s12);
+    recipeRepo.save(s13);
+    recipeRepo.save(s14);
+    
+    // Main meals (14)
+    recipeRepo.save(m1);
+    recipeRepo.save(m2);
+    recipeRepo.save(m3);
+    recipeRepo.save(m4);
+    recipeRepo.save(m5);
+    recipeRepo.save(m6);
+    recipeRepo.save(m7);
+    recipeRepo.save(m8);
+    recipeRepo.save(m9);
+    recipeRepo.save(m10);
+    recipeRepo.save(m11);
+    recipeRepo.save(m12);
+    recipeRepo.save(m13);
+    recipeRepo.save(m14);
 
     // --- Pantry ---
     Pantry pantry = new Pantry();
-    pantry.addStock(pasta, 500);
-    pantry.addStock(chickPeas, 150);
-    pantry.addStock(apple, 2);
-    pantry.addStock(orata, 300);
-    pantry.addStock(rice, 200);
-    pantry.addStock(chicken, 300);
-    pantry.addStock(lettuce, 100);
-    pantry.addStock(mushrooms, 150);
-    pantry.addStock(couscous, 1000);
-    pantry.addStock(greekYNoFat, 1000);
-    pantry.addStock(banana, 5);
-    pantry.addStock(pear, 1);
 
     // --- Meal plan for the whole week ---
     MealPlan plan = new MealPlan(LocalDate.now(), 2000.0);
